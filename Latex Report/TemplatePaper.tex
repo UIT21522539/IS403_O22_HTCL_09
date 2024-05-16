@@ -186,8 +186,28 @@ Where:
     \item $p$ and $q$ are integers, often referred to as autoregressive and moving average parameters, respectively.
 \end{itemize}
 
+\subsection{FAST FOURIER TRANSFORM}
+The Fast Fourier Transform (commonly abbreviated as
+FFT) is a fast algorithm for computing the discrete Fourier
+transform (DFT) of a sequence \cite{Gillian} by using the factor N/2
+log N where N is the number of points, therefore, the FFT is a
+way to convert the time series from time domain to frequency
+domain \cite{Musbah} with equation \cite{Roberts}: 
+\[
+F[n] = \sum_{k=0}^{N-1} f[k] \cdot e^{-i \frac{2\pi}{N} kn}
+\]
 
+where:
+\begin{itemize}
+    \item $F[n]$ is the Discrete Fourier Transform of the sequence.
+    \item $f[k]$ is the $k$-th element of the input sequence.
+    \item $N$ is the total number of elements in the input sequence.
+    \item $n$ is the index of the frequency component in the output sequence $F[n]$.
+    \item $k$ is the index of the element in the input sequence $f[k]$.
+\end{itemize}
 
+% Linear
+\subsection{Linear Regression}
 
 % UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 \begin{thebibliography}{00}
@@ -225,6 +245,19 @@ Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmenta
 % IV
 \bibitem{Gillian}
 Gillian Smith, " The Fast Fourier Transform and its Applications ", \url{https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_project_gillian_smith.pdf}, Accessed August 2019. 
+
+
+% FFT
+
+\bibitem{Musbah}
+Musbah, H., El-Hawary, M., \& Aly, H. (2019). Identifying Seasonality in
+Time Series by Applying Fast Fourier Transform. 2019 IEEE Electrical
+Power and Energy Conference (EPEC).
+
+\bibitem{Roberts}
+S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform". Available at:
+\url{https://www.robots.ox.ac.uk/~sjrob/Teaching/SP/l7.pdf}. Accessed: 2000.
+
 
 \end{thebibliography}
 
