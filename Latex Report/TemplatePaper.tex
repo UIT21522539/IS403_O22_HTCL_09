@@ -170,6 +170,43 @@ The value of BID shares mainly fluctuates between 33,000 VND and 43,000 VND, and
 The highest concentration on the chart at the price of about 76,000 VND with a frequency of nearly 175 times may be a sign of investors' special interest in VCB stock price. Besides, the price also fluctuates frequently around 70,000
 The data chart of price fluctuations over the years shows that stock prices tend to gradually increase, although prices also decrease to the lowest (43925) in early 2020 and the highest (106500) in mid-2023.
 \section{Methodology}
+
+\subsection{ARIMA}
+Auto Regressive Integrated Moving Average (ARIMA) is a model that describes time series based on observed values, which can be used to forecast future values. Applying ARIMA models to any time series showing patterns with no random white noise and non-seasonality. The model was introduced by Box and Jenkins in 1970. To generate short-term forecasts, ARIMA models have shown efficient capabilities, outperforming complex structural models. The future value of a variable in the ARIMA model is a combination of linearity to the past values and errors, expressed as follows \cite{Gillian}:
+
+\begin{equation*}
+Y_t = \phi_0 + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \ldots + \phi_p Y_{t-p} + \varepsilon_t - \theta_1 \varepsilon_{t-1} - \ldots - \theta_q \varepsilon_{t-q}
+\end{equation*}
+
+Where:
+\begin{itemize}
+    \item $Y_t$ is the actual value at time $t$.
+    \item $\varepsilon_t$ is the random error at time $t$.
+    \item $\phi_i$ and $\theta_j$ are the coefficients.
+    \item $p$ and $q$ are integers, often referred to as autoregressive and moving average parameters, respectively.
+\end{itemize}
+
+\subsection{FAST FOURIER TRANSFORM}
+The Fast Fourier Transform (commonly abbreviated as
+FFT) is a fast algorithm for computing the discrete Fourier
+transform (DFT) of a sequence \cite{Gillian} by using the factor N/2
+log N where N is the number of points, therefore, the FFT is a
+way to convert the time series from time domain to frequency
+domain \cite{Musbah} with equation \cite{Roberts}: 
+\[
+F[n] = \sum_{k=0}^{N-1} f[k] \cdot e^{-i \frac{2\pi}{N} kn}
+\]
+
+where:
+\begin{itemize}
+    \item $F[n]$ is the Discrete Fourier Transform of the sequence.
+    \item $f[k]$ is the $k$-th element of the input sequence.
+    \item $N$ is the total number of elements in the input sequence.
+    \item $n$ is the index of the frequency component in the output sequence $F[n]$.
+    \item $k$ is the index of the element in the input sequence $f[k]$.
+\end{itemize}
+
+% Linear
 \subsection{Linear Regression}
 Linear regression is a statistical technique used to model the relationship between a dependent variable, \textit{Y}, and one or more independent variables, \textit{X}. The goal is to find the best-fitting straight line (or hyperplane in higher dimensions) that describes the relationship between the variables. 
 When there are multiple independent variables, the linear regression is called multivariable linear regression, with equation has the form \cite{busin}:
@@ -213,13 +250,28 @@ Tianqi Chen (University of Washington) and Carlos Guestrin (University of Washin
 \bibitem{nabiee2023stock}
 Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmentation Approach." arXiv preprint arXiv:2303.09323, 2023.
 
-\bibitem{busin}
-Evans, J. R., *Business Analytics: Methods, Models, and Decisions*. Hoboken, NJ: Wiley, 2013, p. 276.
 
 % IV
 \bibitem{Gillian}
 Gillian Smith, " The Fast Fourier Transform and its Applications ", \url{https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_project_gillian_smith.pdf}, Accessed August 2019. 
 
+
+% FFT
+\bibitem{Gillian}
+Gillian Smith, " The Fast Fourier Transform and its Applica-
+tions ",\url{ https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_ project_gillian_smith.pdf}, Accessed August 2019.
+
+\bibitem{Musbah}
+Musbah, H., El-Hawary, M., \& Aly, H. (2019). Identifying Seasonality in
+Time Series by Applying Fast Fourier Transform. 2019 IEEE Electrical
+Power and Energy Conference (EPEC).
+
+\bibitem{Roberts}
+S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform". Available at:
+\url{https://www.robots.ox.ac.uk/~sjrob/Teaching/SP/l7.pdf}. Accessed: 2000.
+
+\bibitem{busin}
+Evans, J. R., *Business Analytics: Methods, Models, and Decisions*. Hoboken, NJ: Wiley, 2013, p. 276.
 \end{thebibliography}
 
 
