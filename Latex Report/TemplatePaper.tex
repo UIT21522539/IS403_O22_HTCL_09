@@ -169,9 +169,17 @@ The value of BID shares mainly fluctuates between 33,000 VND and 43,000 VND, and
 % vcb histogram
 The highest concentration on the chart at the price of about 76,000 VND with a frequency of nearly 175 times may be a sign of investors' special interest in VCB stock price. Besides, the price also fluctuates frequently around 70,000
 The data chart of price fluctuations over the years shows that stock prices tend to gradually increase, although prices also decrease to the lowest (43925) in early 2020 and the highest (106500) in mid-2023.
-
-
-
+\section{Methodology}
+\subsection{Linear Regression}
+Linear regression is a statistical technique used to model the relationship between a dependent variable, \textit{Y}, and one or more independent variables, \textit{X}. The goal is to find the best-fitting straight line (or hyperplane in higher dimensions) that describes the relationship between the variables. 
+When there are multiple independent variables, the linear regression is called multivariable linear regression, with equation has the form \cite{busin}:
+ \[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+Where:\\
+	\indent\textbullet\ Y is the dependent variable.\\
+	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent variables.\\
+	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
+	\indent\textbullet\ \(\varepsilon\) is the error term.
 
 % UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 \begin{thebibliography}{00}
@@ -205,9 +213,12 @@ Tianqi Chen (University of Washington) and Carlos Guestrin (University of Washin
 \bibitem{nabiee2023stock}
 Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmentation Approach." arXiv preprint arXiv:2303.09323, 2023.
 
+\bibitem{busin}
+Evans, J. R., *Business Analytics: Methods, Models, and Decisions*. Hoboken, NJ: Wiley, 2013, p. 276.
 
 % IV
-
+\bibitem{Gillian}
+Gillian Smith, " The Fast Fourier Transform and its Applications ", \url{https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_project_gillian_smith.pdf}, Accessed August 2019. 
 
 \end{thebibliography}
 
