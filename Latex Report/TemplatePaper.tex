@@ -1,0 +1,220 @@
+\documentclass{ieeeojies}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+
+\setlength{\parindent}{0.5cm}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+\title{FORECASTING STOCK PRICES IN VIETNAM USING MACHINE LEARNING AND DEEP LEARNING MODELS}
+
+\author{\uppercase{Tran Truc Quynh}\authorrefmark{1},
+\uppercase{Luong Thi Thuy Diem\authorrefmark{2}, and Nguyen Huu Thanh}\authorrefmark{3}}
+
+\address[1]{Faculty of Information Systems, University of Information Technology, (e-mail: 21522539@gm.uit.edu.vn)}
+\address[2]{Faculty of Information Systems, University of Information Technology, (e-mail: 21521953@gm.uit.edu.vn)}
+\address[3]{Faculty of Information Systems, University of Information Technology, (e-mail: 21522599@gm.uit.edu.vn)}
+
+\markboth
+{Author \headeretal: Tran Truc Quynh,Nguyen Huu Thanh,Luong Thi Thuy Diem}
+{Author \headeretal: Tran Truc Quynh,Nguyen Huu Thanh,Luong Thi Thuy Diem}
+
+\begin{abstract}
+The stock market has assumed a significant position within investment portfolios, as evidenced by the recent surge in investor participation within Vietnam's market. However, navigating the inherent volatility of stock prices requires experience and robust analytical tools. This paper seeks to empower investors by employing various forecasting models such as Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to analyze price trends within three prominent bank stocks: ACB, BIDV, VCB traded on Hochiminh Stock Exchange (HOSE) over a five-year period (2019-2024). By evaluating the effectiveness of these models using RMSE, MAPE, and MSLE techniques. This paper aims to equip investors for informed stock selection within their portfolios, ultimately contributing to more accurate decision-making.
+\end{abstract}
+
+\begin{keywords}
+Time Series Analysis, Machine Learning, Financial Forecasting, Vietnamese Stock Market,
+GRU, RNN, ARIMA, LSTM, FFT, XGBoost, FCN, Linear Regression.
+\end{keywords}
+
+\titlepgskip=-15pt
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+The Vietnamese stock market has witnessed a record-high level of participation in recent years, reflecting the growing attention and interest it has garnered. This trend is a positive indicator of the market's potential and the overall recovery of the economy in the post-2023 period. However, the stock market also inherently carries short-term risks that investors must navigate. Among the various sectors, the banking industry has traditionally occupied a high proportion and serves as a crucial pillar of the economy.
+
+The purpose of this paper is to support investors in making accurate decisions regarding three bank stocks (ACB, BID, VCB) listed on the Hochiminh Stock Exchange (HOSE).
+To achieve this goal, the study will apply various models, including Linear Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to the stock price data from 2019 to 2024 to forecast the trends.Techniques such as RMSE, MAPE, and MSLE will be utilized to evaluate the effectiveness of these models.
+\section{Related Works}
+Over the past several years, a significant volume of research has concentrated on forecasting stock prices by leveraging various machine learning and statistical techniques. Both CAKRA (2015) and URAS (2020) used linear regression to forecast stock prices and Bitcoin closing prices. CAKRA applied linear regression based on sentiment analysis to process Twitter data, improving the accuracy of stock price predictions \cite{cakra2015stock}. Meanwhile, URAS combined linear regression and neural network models to forecast Bitcoin closing prices, showing that linear regression had faster execution speed and could accurately predict Bitcoin price fluctuations \cite{uras2020forecasting}.\\
+
+Manish Dadhich studied and applied the ARIMA model for short-term forecasting of BSE and NSE stock prices. After carrying out his research, Manish Dadhich demonstrated the strength of the ARIMA model in predicting daily closing prices of time series data \cite{dadhich2021predictive}. In Anusha Garlapati's research, she also used ARIMA to forecast stock prices and concluded that ARIMA is a good model for predicting stock prices \cite{garlapati2021stock}.\\ 
+
+Yongqiong Zhu \cite{ZhuRNN} applied an RNN model to predict the stock prices of Apple. The training dataset spanned 10 years with 65\% allocated for training and the remaining 3\% for testing. With 50 epochs, Adam optimization, and Mean Squared Error (MSE) as the loss function, the model achieved highly favorable outcomes. It attained a predictive accuracy exceeding 95\%, with a reported loss value of 0.1\%. In 2015, Xiao Ding \cite{DingGRU} also proposed a deep learning method for event-driven stock market prediction.\\
+
+Shejul et al. \cite{ShejulGRU} compared the performance of the Gated Recurrent Unit (GRU) and Bidirectional Long Short-Term Memory (BiLSTM) models in predicting stock prices. Experimental results indicate that both models accurately forecast future stock prices, with the BiLSTM model outperforming the GRU model. Despite this, the GRU model demonstrates nearly double the speed of the BiLSTM model due to its simpler architecture. Overall, both models offer precise predictions and can effectively anticipate future stock market trends.\\
+
+C. Fjellström (2022) \cite{fjellstrom2022lstm} explored an LSTM ensemble for stock price prediction in the paper "Long Short-Term Memory Neural Network for Financial Time Series." The work demonstrates superior performance over traditional portfolios, offering insights into LSTM's potential for financial forecasting and strategies for enhancing model accuracy and reducing market risk. S. Mehtab, J. Sen (2020) \cite{mehtab2020stock} proposed a deep learning approach for stock price prediction by employing Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) networks. Their work contributes to the field by exploring the effectiveness of this combined deep learning architecture in forecasting the NIFTY 50 index prices. They further emphasize the importance of data pre-processing and model evaluation, providing a methodological blueprint for financial market analysis using deep learning techniques.\\
+
+Chen et al.\cite{ChenFFT} used an Fast Fourier Transform algorithm to deal with historical training data for forecasting stock prices, achieving a more highly accurate. Experimental analysis is performed on datasets covering a seven-year period of both the Taiwan Stock Exchange Capitalization Weighted Stock Index (TAIEX) and the Dow-Jones Industrial Average (DJIA). \\
+
+A. Qingwen Jin et al. \cite{jin2019using} established predictive models using the Best Track TC dataset and the XGBOOST algorithm to anticipate Tropical Cyclone (TC) intensity in the Western North Pacific (WNP). Across six scenarios, the model achieved high accuracy with MAE < 4.50 m/s, CC > 0.89, and NRMSE < 10.00\%. The XGBOOST model exhibited superior performance compared to traditional Back-Propagation Neural Network (BPNN) models for the same predictors and independent prediction samples. A. O. A. A. A. Tianqi Chen and Carlos Guestrin (2016)\cite{chen2016xgboost} introduced XGBoost, a scalable tree boosting system. The paper describes the architecture of XGBoost and its core algorithms, presenting improvements to enhance performance and accuracy across a variety of machine learning tasks.\\
+
+Fully Convolutional Networks (FCNs) have been studied and applied in various fields related to image data processing and semantic segmentation. According to Shima Nabiee's research on stock trend prediction, FCNs have also been proven to be a powerful and flexible tool, enabling the analysis and prediction of stock price trends based on raw data \cite{nabiee2023stock}.
+\section{Materials}
+\subsection{Dataset}
+
+The analysis will focus on the historical stock prices of three banks in Vietnam: the Asia Commercial Joint Stock Bank (ACB), the Bank for Investment and Development of Vietnam (BIDV), and the Joint Stock Commercial Bank for Foreign Trade of Vietnam (VCB). The data spans from January 3, 2019, to January 3, 2024, and includes information such as date, price, opening price, highest and lowest prices, volume, and price change. However, the primary aim is to forecast closing prices, so only the "Price" column (VND) will be used for analysis.
+
+\subsection{Descriptive Statistics}
+\begin{table}[H]
+  \centering
+  \caption{ACB, BIDV, VCB’s Descriptive Statistics}
+  \begin{tabular}{|>{\columncolor[HTML]{4CCD99}}c|c|c|c|}
+    \hline
+     \rowcolor[HTML]{4CCD99} & ACB & BID & VCB \\ \hline
+     Count & 1247 & 1252 & 	1252 \\ \hline
+     Mean & 19.712	 & 35.993 & 74.810\\ \hline
+     Standard Deviation  & 6.205 & 6.574 & 12.664\\ \hline
+     Min & 8.763 & 23.420 & 43.925\\ \hline
+     25\% & 11.963 & 31.226 & 65.274\\ \hline
+     50\% & 22.000 & 34.823 & 75.871\\ \hline
+     75\% & 24.980 & 41.600 & 84.525\\ \hline
+     Max & 30.360 & 53.900 & 106.500\\ \hline
+     Variance & 49.100 & 28.667 & 106.500\\ \hline
+     Skewness & -0.345 & 0.299 & -0.132\\ \hline
+     Kurtosis & -1.457 & -0.821 & -0.530\\ \hline
+\end{tabular}
+\end{table}
+\subsubsection{ACB stock price visualization}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{bibliography/Figure/ACBboxplot.png}
+    \caption{ACB stock price's boxplot}
+    \label{fig:1}
+    \end{minipage}
+    \hfill
+     \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/ACBtime.png}
+        \caption{ACB stock price's time}
+        \label{fig:2}
+    \end{minipage}
+        \centering
+    \begin{minipage}{0.23\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{bibliography/Figure/ACBhist.png}
+    \caption{ACB stock price's histogram}
+    \label{fig:3}
+    \end{minipage}
+\end{figure}
+    ACB's price distribution appears left-skewed, as evidenced by the pronounced peak in the histogram at the lower end of the price range. Interestingly, ACB's box plot appears relatively compact, with the median closer to the higher end of the price range
+\subsubsection{BID stock price visualization}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/Figure/BIDboxplot.png}
+        \caption{BID stock price's boxplot}
+        \label{fig:1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/BIDtime.png}
+        \caption{BID stock price's time}
+        \label{fig:2}
+    \end{minipage}
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/Figure/BIDhist.png}
+        \caption{BID stock price's histogram}
+        \label{fig:3}
+    \end{minipage}
+\end{figure}
+The value of BID shares mainly fluctuates between 33,000 VND and 43,000 VND, and the highest current value that BID shares have reached is 54,000 VND. Additionally, the current trend regarding the value of BID shares is on the rise.
+\subsubsection{VCB stock price visualization}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{bibliography/Figure/VCBboxplot.png}
+        \caption{VCB stock price's boxplot}
+        \label{fig:1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=1.1\textwidth]{bibliography/Figure/VCBtime.png}
+        \caption{VCB stock price's time}
+        \label{fig:2}
+    \end{minipage}
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/VCBhist.png}
+        \caption{VCB stock price's histogram}
+        \label{fig:3}
+    \end{minipage}
+\end{figure}
+
+% vcb boxplot
+ Based on VCB's Boxplot, it can be seen that most of the data is concentrated in Q2 to Q3 with length 8654 approximately 75871 to 84525.
+% vcb histogram
+The highest concentration on the chart at the price of about 76,000 VND with a frequency of nearly 175 times may be a sign of investors' special interest in VCB stock price. Besides, the price also fluctuates frequently around 70,000
+The data chart of price fluctuations over the years shows that stock prices tend to gradually increase, although prices also decrease to the lowest (43925) in early 2020 and the highest (106500) in mid-2023.
+
+
+
+
+% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+\begin{thebibliography}{00}
+\bibitem{cakra2015stock}
+Yahya Eru Cakra and Bayu Distiawan Trisedya. "Stock price prediction using linear regression based on sentiment analysis." In: 2015 International Conference on Advanced Computer Science and Information Systems (ICACSIS). IEEE, 2015. pp. 147-154.
+\bibitem{uras2020forecasting}
+Nicola Uras, et al. "Forecasting Bitcoin closing price series using linear regression and neural networks models." PeerJ Computer Science, vol. 6, 2020, article e279.
+\bibitem{dadhich2021predictive}
+Manish Dadhich, et al. ``Predictive models for stock market index using stochastic time series ARIMA modeling in emerging economy.'' In: Advances in Mechanical Engineering: Select Proceedings of CAMSE 2020. Springer Singapore, 2021. pp. 281-290.
+\bibitem{garlapati2021stock}
+Anusha Garlapati, et al. ``Stock price prediction using Facebook Prophet and ARIMA models.'' In: 2021 6th International Conference for Convergence in Technology (I2CT). IEEE, 2021. pp. 1-7.
+\bibitem{ZhuRNN}
+Zhu Y. Stock price prediction using the RNN model. InJournal of Physics: Conference Series 2020 Oct 1 (Vol. 1650, No. 3, p. 032103). IOP Publishing. 
+\bibitem{DingGRU}
+Ding X, Zhang Y, Liu T, Duan J. Deep learning for event-driven stock prediction. InTwenty-fourth international joint conference on artificial intelligence 2015 Jun 25.
+\bibitem{ShejulGRU}
+Shejul, A.A., Chaudhari, A., Dixit, B.A., Lavanya, B.M. (2023). Stock Price Prediction Using GRU, SimpleRNN and LSTM. In: Kulkarni, A.J., Mirjalili, S., Udgata, S.K. (eds) Intelligent Systems and Applications. Lecture Notes in Electrical Engineering, vol 959. Springer, Singapore 
+
+\bibitem{fjellstrom2022lstm}
+Carmina Fjellström. "Long Short-Term Memory Neural Network for Financial Time Series." arXiv:2201.08218v1 [q-fin.ST], 20 Jan 2022.
+\bibitem{mehtab2020stock}
+Sidra Mehtab and Jaydip Sen. "Stock Price Prediction Using CNN and LSTM-Based Deep Learning Mode." Department of Data Science, Praxis Business School, Kolkata, INDIA. Accepted version of paper presented at 2020 International Conference on Decision Aid Sciences and Applications (DASA’20), Bahrain, November 8 – 9, 2020.
+
+\bibitem{ChenFFT}
+Chen MY, Chen BT. Online fuzzy time series analysis based on entropy discretization and a Fast Fourier Transform. Applied Soft Computing. 2014 Jan 1;14:156-66. 
+
+\bibitem{jin2019using}
+Qingwen Jin, Xiangtao Fan, Jian Liu, Zhuxin Xue, and Hongdeng Jian. "Using eXtreme Gradient BOOSTing to Predict Changes in Tropical Cyclone Intensity over the Western North Pacific." Atmosphere, vol. 10, no. 6, 2019, pp. 341–.
+\bibitem{chen2016xgboost}
+Tianqi Chen (University of Washington) and Carlos Guestrin (University of Washington). "XGBoost: A Scalable Tree Boosting System."
+\bibitem{nabiee2023stock}
+Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmentation Approach." arXiv preprint arXiv:2303.09323, 2023.
+
+
+% IV
+
+
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%
+
+
+\EOD
+
+\end{document}
