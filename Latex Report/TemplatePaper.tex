@@ -169,6 +169,22 @@ The value of BID shares mainly fluctuates between 33,000 VND and 43,000 VND, and
 % vcb histogram
 The highest concentration on the chart at the price of about 76,000 VND with a frequency of nearly 175 times may be a sign of investors' special interest in VCB stock price. Besides, the price also fluctuates frequently around 70,000
 The data chart of price fluctuations over the years shows that stock prices tend to gradually increase, although prices also decrease to the lowest (43925) in early 2020 and the highest (106500) in mid-2023.
+\section{Methodology}
+
+\subsection{ARIMA}
+Auto Regressive Integrated Moving Average (ARIMA) is a model that describes time series based on observed values, which can be used to forecast future values. Applying ARIMA models to any time series showing patterns with no random white noise and non-seasonality. The model was introduced by Box and Jenkins in 1970. To generate short-term forecasts, ARIMA models have shown efficient capabilities, outperforming complex structural models. The future value of a variable in the ARIMA model is a combination of linearity to the past values and errors, expressed as follows \cite{Gillian}:
+
+\begin{equation*}
+Y_t = \phi_0 + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \ldots + \phi_p Y_{t-p} + \varepsilon_t - \theta_1 \varepsilon_{t-1} - \ldots - \theta_q \varepsilon_{t-q}
+\end{equation*}
+
+Where:
+\begin{itemize}
+    \item $Y_t$ is the actual value at time $t$.
+    \item $\varepsilon_t$ is the random error at time $t$.
+    \item $\phi_i$ and $\theta_j$ are the coefficients.
+    \item $p$ and $q$ are integers, often referred to as autoregressive and moving average parameters, respectively.
+\end{itemize}
 
 
 
@@ -207,7 +223,8 @@ Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmenta
 
 
 % IV
-
+\bibitem{Gillian}
+Gillian Smith, " The Fast Fourier Transform and its Applications ", \url{https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_project_gillian_smith.pdf}, Accessed August 2019. 
 
 \end{thebibliography}
 
