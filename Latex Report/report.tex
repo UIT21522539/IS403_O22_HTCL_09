@@ -218,6 +218,25 @@ Where:\\
 	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
 	\indent\textbullet\ \(\varepsilon\) is the error term.
 
+\subsection{XGBoost}
+XGBoost is a highly efficient and scalable implementation of gradient boosting, a powerful machine learning technique. XGBoost operates by constructing a series of decision trees in an additive manner. Each tree is built sequentially, with each one correcting the errors of the previous trees. The model’s objective is to minimize the loss function. Key advantages of XGBoost include its ability to handle large datasets through parallelized computing, effective handling of missing data values, and flexible parameter tuning. These features, along with its state-of-the-art algorithm for supervised learning problems, known for its high accuracy, which rivals deep learning models\cite{Xgboost} .Unlike deep learning that typically requires numerical raw data, XGBoost can handle tabular datasets of any size and type, including categorical data often found in business models.  
+
+Explanation of the mathematics behind XGBoost:\\
+\textbf{Ensemble Model:}XGBoost combines predictions from multiple decision trees $(f_k)$ to create a final prediction (F(x))\cite{Xgboost}:
+\begin{equation*}
+y_i = \phi(x_i) = \sum_{k=1}^K f_k(x_i), \quad f_k \in \mathcal{F},
+\end{equation*}
+
+Where: $F = {f(x) = w_q(x) \mid q : \mathbb{R}^m \to T, w \in \mathbb{R}^T}$\\
+
+\textbf{Objective Function:}
+It minimizes a loss function (L) that measures prediction error, with a regularization term ($\Omega$) to prevent overfitting:\cite{geekXGboost}
+
+\begin{equation*}
+\text{obj}(\theta) = \sum_{i=1}^n l(y_i, \hat{y}_i) + \sum_{k=1}^K \Omega(f_k)
+\end{equation*}
+
+Where, first term is the loss function and the second is the regularization parameter\\
 % UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 \begin{thebibliography}{00}
 \bibitem{cakra2015stock}
@@ -257,6 +276,9 @@ Gillian Smith, " The Fast Fourier Transform and its Applications ", \url{https:/
 
 
 % FFT
+\bibitem{Gillian}
+Gillian Smith, " The Fast Fourier Transform and its Applica-
+tions ",\url{ https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_ project_gillian_smith.pdf}, Accessed August 2019.
 
 \bibitem{Musbah}
 Musbah, H., El-Hawary, M., \& Aly, H. (2019). Identifying Seasonality in
@@ -269,6 +291,12 @@ S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform". Available at:
 
 \bibitem{busin}
 Evans, J. R., *Business Analytics: Methods, Models, and Decisions*. Hoboken, NJ: Wiley, 2013, p. 276.
+
+\bibitem{Xgboost}
+T. Chen and C. Guestrin, "XGBoost: A Scalable Tree Boosting System," arXiv:1603.02754v3 [cs.LG], June 10, 2016.
+
+\bibitem{geekXGboost}
+P. Pawangfg, "XGBoost," GeeksforGeeks, Available: https://www.geeksforgeeks.org/xgboost/. [Accessed: 06-Feb-2023].
 \end{thebibliography}
 
 
