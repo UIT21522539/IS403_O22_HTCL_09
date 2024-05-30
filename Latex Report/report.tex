@@ -288,6 +288,30 @@ FCNs lack pooling and regularization, benefiting from parameter invariance acros
         \label{fig:3}
 \end{minipage}
 \end{figure}
+<<<<<<< HEAD
+\subsection{Recurrent neural network (RNN)}
+A recurrent neural network (RNN) is a type of artificial neural network which uses sequential data or time series data\cite{IBM}.  A recurrent neural network (RNN) is an extension of a conventional feedforward neural network, which is able to handle a variable-length sequence input. The RNN handles the variable-length sequence by having a recurrent hidden state whose activation at each time is dependent on that of the previous time\cite{Chung}.
+For each timestep \( t \), the activation \( a^{<t>} \) and the output \( y^{<t>} \) are expressed as follows:
+\[
+a^{<t>} = g_1\left( W_{aa} a^{<t-1>} + W_{ax} x^{<t>} + b_a \right)
+\]
+and
+\[
+y^{<t>} = g_2\left( W_{ya} a^{<t>} + b_y \right)
+\]
+where \( W_{ax}, W_{aa}, W_{ya}, b_a, b_y \) are coefficients that are shared temporally and \( g_1, g_2 \) are activation functions \cite{standford}.
+
+\begin{figure}[H]
+    \centering
+\begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/RNNmodel.png}
+        \caption{Architecture of a Traditional RNN}
+        \label{fig:3}
+\end{minipage}
+\end{figure}
+=======
+>>>>>>> 24940c910db10766da1e8600f40dc6fa53ff0bdd
 
 % UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 \begin{thebibliography}{00}
@@ -325,6 +349,48 @@ Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmenta
 % IV
 \bibitem{Gillian}
 Gillian Smith, " The Fast Fourier Transform and its Applications ", \url{https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_project_gillian_smith.pdf}, Accessed August 2019. 
+<<<<<<< HEAD
+
+
+% FFT
+\bibitem{Gillian}
+Gillian Smith, " The Fast Fourier Transform and its Applica-
+tions ",\url{ https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_ project_gillian_smith.pdf}, Accessed August 2019.
+
+\bibitem{Musbah}
+Musbah, H., El-Hawary, M., \& Aly, H. (2019). Identifying Seasonality in
+Time Series by Applying Fast Fourier Transform. 2019 IEEE Electrical
+Power and Energy Conference (EPEC).
+
+\bibitem{Roberts}
+S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform". Available at:
+\url{https://www.robots.ox.ac.uk/~sjrob/Teaching/SP/l7.pdf}. Accessed: 2000.
+
+\bibitem{busin}
+Evans, J. R., *Business Analytics: Methods, Models, and Decisions*. Hoboken, NJ: Wiley, 2013, p. 276.
+
+\bibitem{Xgboost}
+T. Chen and C. Guestrin, "XGBoost: A Scalable Tree Boosting System," arXiv:1603.02754v3 [cs.LG], June 10, 2016.
+
+\bibitem{geekXGboost}
+P. Pawangfg, "XGBoost," GeeksforGeeks, Available: https://www.geeksforgeeks.org/xgboost/. [Accessed: 06-Feb-2023].
+
+%GRU
+\bibitem{Yamak}
+Yamak, P. T., Yujian, L., \& Gadosey, P. K. (2019, December). A comparison between arima, lstm, and gru for time series forecasting. In Proceedings of the 2019 2nd international conference on algorithms, computing and artificial intelligence (pp. 49-55).
+%FCN
+\bibitem{Ismail}
+Ismail Fawaz, H., Forestier, G., Weber, J., Idoumghar, L., \& Muller, P. A. (2019). Deep learning for time series classification: a review. Data mining and knowledge discovery, 33(4), 917-963.
+% RNN
+\bibitem{IBM}
+IBM Technology company, “What are recurrent neural networks?”, Available at: \url{https://www.ibm.com/topics/recurrent-neural-networks}
+\bibitem{Chung}
+Chung, Junyoung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. "Empirical evaluation of gated recurrent neural networks on sequence modeling." arXiv preprint arXiv:1412.3555 (2014).
+\bibitem{standford}
+A. Amidi and S. Amidi, "Recurrent Neural Networks Cheatsheet," Stanford University, [Online]. Available: \url{https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks}. [Accessed: 29-May-2024]. 
+
+=======
+>>>>>>> 24940c910db10766da1e8600f40dc6fa53ff0bdd
 
 
 % FFT
