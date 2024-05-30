@@ -237,6 +237,117 @@ It minimizes a loss function (L) that measures prediction error, with a regulari
 \end{equation*}
 
 Where, first term is the loss function and the second is the regularization parameter\\
+
+\subsection{GRU}
+The Gated Recurrent Unit, just like the LSTM, is a Recurrent
+Neural Network. It, however, has a less complicated structure
+compared to LSTM. It lacks an output gate but has an update z
+and a reset gate r. These gates are vectors which decide what
+information should be passed to the output. 
+The Reset gate defines how to combine the new input with the
+previous memory. The definition of how much of the last memory
+to keep is done by the Update [12]. The GRU has the following
+equations:\cite{Yamak}
+\\
+Update gate:
+\begin{equation}
+z_t = \sigma(W_z h_{t-1} + U_z x_t)
+\end{equation}
+Reset gate:
+\begin{equation}
+r_t = \sigma(W_r h_{t-1} + U_r x_t)
+\end{equation}
+Cell state:
+\begin{equation}
+c_t = \tanh(W_c (h_{t-1} \ast r_t) + U_c x_t)
+\end{equation}
+New state:
+\begin{equation}
+h_t = (z_t \ast c_t) + ((1 - z_t) \ast h_{t-1})
+\end{equation}
+\begin{figure}[H]
+    \centering
+\begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/GRU_diagram.png}
+        \caption{Fully Convolutional Neural Network architecture}
+        \label{fig:3}
+\end{minipage}
+\end{figure}
+
+\subsection{Fully Convolutional Neural Network(FCN)}
+Fully Convolutional Neural Networks (FCNs) were introduced by Wang et al. (2017b) for univariate time series classification, validated on 44 UCR/UEA datasets. FCNs use convolutional layers without local pooling, maintaining the time series length throughout. A key feature is replacing the final fully connected layer with a Global Average Pooling (GAP) layer, reducing parameters and enabling Class Activation Mapping (CAM) to identify crucial input segments. 
+FCNs lack pooling and regularization, benefiting from parameter invariance across varying time series lengths due to GAP, supporting transfer learning for model adaptation from one dataset to another.\cite{Ismail}
+
+\begin{figure}[H]
+    \centering
+\begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/FCN.png}
+        \caption{Fully Convolutional Neural Network architecture}
+        \label{fig:3}
+\end{minipage}
+\end{figure}
+\subsection{Recurrent neural network (RNN)}
+A recurrent neural network (RNN) is a type of artificial neural network which uses sequential data or time series data\cite{IBM}.  A recurrent neural network (RNN) is an extension of a conventional feedforward neural network, which is able to handle a variable-length sequence input. The RNN handles the variable-length sequence by having a recurrent hidden state whose activation at each time is dependent on that of the previous time\cite{Chung}.
+For each timestep \( t \), the activation \( a^{<t>} \) and the output \( y^{<t>} \) are expressed as follows:
+\[
+a^{<t>} = g_1\left( W_{aa} a^{<t-1>} + W_{ax} x^{<t>} + b_a \right)
+\]
+and
+\[
+y^{<t>} = g_2\left( W_{ya} a^{<t>} + b_y \right)
+\]
+where \( W_{ax}, W_{aa}, W_{ya}, b_a, b_y \) are coefficients that are shared temporally and \( g_1, g_2 \) are activation functions \cite{standford}.
+
+\begin{figure}[H]
+    \centering
+\begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/RNNmodel.png}
+        \caption{Architecture of a Traditional RNN}
+        \label{fig:3}
+\end{minipage}
+\end{figure}
+\subsection{Long short term memory (LSTM)}
+The Long Short-Term Memory (LSTM) model is a recurrent neural network designed to handle sequential data like time series. Unlike standard RNNs, LSTMs employ memory cells and gating mechanisms to selectively retain and discard information over long sequences. This allows LSTMs to effectively capture long-range dependencies within the sequential data.
+
+At the core of an LSTM are the memory cells regulated by gates - input gate (controls inflow), forget gate (controls clearing), and output gate (controls outflow). This gating architecture enables LSTMs to learn and leverage long-term patterns and relationships present in sequences. By addressing long-range temporal dependencies, LSTMs excel at sequence prediction tasks, making them well-suited for applications such as time series forecasting.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \scalebox{0.7}[0.7]{\includegraphics[width=\textwidth]{bibliography/Figure/LSTm.png}}
+        \caption{LSTM model}
+        \label{fig:3}
+    \end{minipage}
+\end{figure}
+Input gate ($i_t$):
+\[i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)\]
+
+Forget gate ($f_t$): 
+\[f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)\] 
+
+Output gate ($o_t$): 
+\[o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]
+
+Memory cell ($C_t$): 
+\[\tilde{C}_t &= \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) 
+C_t &= f_t \ast C_{t-1} + i_t \ast \tilde{C}_t\]
+
+Hidden state ($h_t$): 
+\[h_t &= o_t \ast \tanh(C_t)\]
+
+\begin{itemize}
+\item $i_t, f_t, o_t$ are the values of the gates at time $t$.
+\item $W_i, W_f, W_o, W_C$ are weight matrices.
+\item $b_i, b_f, b_o, b_c$ are bias vectors.
+\item $h_{t-1}$ is the hidden state from the previous layer.
+\item $x_t$ is the input at time $t$.
+\item $C_t$ is the memory cell state at time $t$.
+\item $h_t$ is the hidden state at time $t$.
+\end{itemize}
+
 % UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 \begin{thebibliography}{00}
 \bibitem{cakra2015stock}
@@ -297,7 +408,26 @@ T. Chen and C. Guestrin, "XGBoost: A Scalable Tree Boosting System," arXiv:1603.
 
 \bibitem{geekXGboost}
 P. Pawangfg, "XGBoost," GeeksforGeeks, Available: https://www.geeksforgeeks.org/xgboost/. [Accessed: 06-Feb-2023].
+
+%GRU
+\bibitem{Yamak}
+Yamak, P. T., Yujian, L., \& Gadosey, P. K. (2019, December). A comparison between arima, lstm, and gru for time series forecasting. In Proceedings of the 2019 2nd international conference on algorithms, computing and artificial intelligence (pp. 49-55).
+%FCN
+\bibitem{Ismail}
+Ismail Fawaz, H., Forestier, G., Weber, J., Idoumghar, L., \& Muller, P. A. (2019). Deep learning for time series classification: a review. Data mining and knowledge discovery, 33(4), 917-963.
+% RNN
+\bibitem{IBM}
+IBM Technology company, “What are recurrent neural networks?”, Available at: \url{https://www.ibm.com/topics/recurrent-neural-networks}
+\bibitem{Chung}
+Chung, Junyoung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. "Empirical evaluation of gated recurrent neural networks on sequence modeling." arXiv preprint arXiv:1412.3555 (2014).
+\bibitem{standford}
+A. Amidi and S. Amidi, "Recurrent Neural Networks Cheatsheet," Stanford University, [Online]. Available: \url{https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks}. [Accessed: 29-May-2024]. 
+
+
+
 \end{thebibliography}
+
+
 
 
 %%%%%%%%%%%%%%%
