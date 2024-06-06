@@ -492,7 +492,145 @@ Based on the table, we conclude that the GRU model with a 7:3 proportion is the 
   \end{minipage}
 \end{figure}
 
+<<<<<<< HEAD
 
+=======
+\subsection{BID dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+         \multirow{3}{*}{ARIMA} 
+         & 7:3 & 9563.7477 & 19.8847 & 8620.5906 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{6464.7779} & \textcolor{red}{10.0109} & \textcolor{red}{4764.1887} \\ 
+         & 9:1 & 6158.2991 & 10.6520 & 5292.1888 \\
+         \hline
+         \multirow{3}{*}{GRU} 
+         & 7:3 & 811.9859 & 1.3382 & 586.6200 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{804.1871} & \textcolor{red}{1.2751} & \textcolor{red}{584.2526} \\
+         & 9:1 & 1047.6395 & 1.4999 & 744.9879 \\
+         \hline
+         \multirow{3}{*}{FCN} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{1636.2305} & \textcolor{red}{0.0317} & \textcolor{red}{1336.0777} \\ 
+         & 8:2 & 2481.7959 & 0.0432 & 2005.2779 \\ 
+         & 9:1 & 2552.3799 & 0.0446 & 2247.3583 \\
+         \hline
+         \multirow{3}{*}{RNN} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{730.3118} & \textcolor{red}{1.2270} & \textcolor{red}{533.1443} \\ 
+         & 8:2 & 831.5655 & 1.3253 & 603.7621 \\ 
+         & 9:1 & 920.7904 & 1.2527 & 617.9939 \\
+         \hline
+         \multirow{3}{*}{LSTM} 
+         & 7:3 & 531.4864 & 1.4123 & 339.2725 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{493.5754} & \textcolor{red}{1.2753} & \textcolor{red}{329.8735} \\ 
+         & 9:1 & 577.0604 & 1.6582 & 426.0182 \\
+         \hline
+         \multirow{3}{*}{FFT} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{4894.1684} & \textcolor{red}{11.6059} & \textcolor{red}{5783.9707} \\
+         & 8:2 & 6459.4307 & 12.6873 & 5674.0699 \\ 
+         & 9:1 & 8002.1502 & 12.4200 & 6248.1023 \\
+         \hline
+         \multirow{3}{*}{XGBOOST} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{2908.0631} & \textcolor{red}{3.8156} & \textcolor{red}{4318.2261} \\ 
+         & 8:2 & 3206.6953 & 3.9514 & 3670.8829 \\ 
+         & 9:1 & 3752.4153 & 7.2912 & 3620.9575 \\
+         \hline
+         \multirow{3}{*}{LR} 
+         & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{4496.2716} \\
+         & 8:2 & 6678.0104 & 12.9205 & 5097.8035 \\ 
+         & 9:1 & 8699.7701 & 19.1198 & 7686.7608 \\
+         \hline
+    \end{tabular}
+    \caption{BID Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+
+Based on the evaluation table, the LSTM model with an 8:2 training/testing ratio provides the best prediction results for BID stock prices, with the lowest RMSE (493.5754), MAPE (1.2753), and MAE (329.8735). GRU is also a strong choice with similar performance at the same ratio. Overall, LSTM stands out as the top choice for predicting BID stock prices.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-BID.png}
+    \caption{ARIMA model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-BIDV.png}
+    \caption{GRU model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-BID.png}
+    \caption{FCN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-BID.png}
+    \caption{RNN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-BID.png}
+    \caption{LSTM model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-BID.png}
+    \caption{FFT model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-BID.png}
+    \caption{XGBoost model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LR-BID.png}
+    \caption{Linear Regression model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+>>>>>>> origin/week6_TranTrucQuynh
 
 
 \section{ORIENTATION}
