@@ -42,28 +42,25 @@ GRU, RNN, ARIMA, LSTM, FFT, XGBoost, FCN, Linear Regression.
 \titlepgskip=-15pt
 
 \maketitle
-
-\section{Introduction}
-\label{sec:introduction}
-
+\section{Introduction}% \label{sec:introduction}
 The Vietnamese stock market has witnessed a record-high level of participation in recent years, reflecting the growing attention and interest it has garnered. This trend is a positive indicator of the market's potential and the overall recovery of the economy in the post-2023 period. However, the stock market also inherently carries short-term risks that investors must navigate. Among the various sectors, the banking industry has traditionally occupied a high proportion and serves as a crucial pillar of the economy.
-
 The purpose of this paper is to support investors in making accurate decisions regarding three bank stocks (ACB, BID, VCB) listed on the Hochiminh Stock Exchange (HOSE).
+
 To achieve this goal, the study will apply various models, including Linear Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to the stock price data from 2019 to 2024 to forecast the trends.Techniques such as RMSE, MAPE, and MSLE will be utilized to evaluate the effectiveness of these models.
 \section{Related Works}
-Over the past several years, a significant volume of research has concentrated on forecasting stock prices by leveraging various machine learning and statistical techniques. Both CAKRA (2015) and URAS (2020) used linear regression to forecast stock prices and Bitcoin closing prices. CAKRA applied linear regression based on sentiment analysis to process Twitter data, improving the accuracy of stock price predictions \cite{cakra2015stock}. Meanwhile, URAS combined linear regression and neural network models to forecast Bitcoin closing prices, showing that linear regression had faster execution speed and could accurately predict Bitcoin price fluctuations \cite{uras2020forecasting}.\\
+Over the past several years, a significant volume of research has concentrated on forecasting stock prices by leveraging various machine learning and statistical techniques. Maqsood et al. have used linear regression and 2 models for stock exchange forecasting \cite{cakra2015stock}. Meanwhile, URAS combined linear regression and neural network models to forecast Bitcoin closing prices, showing that linear regression had faster execution speed and could accurately predict Bitcoin price fluctuations \cite{uras2020forecasting}.
 
-Manish Dadhich studied and applied the ARIMA model for short-term forecasting of BSE and NSE stock prices. After carrying out his research, Manish Dadhich demonstrated the strength of the ARIMA model in predicting daily closing prices of time series data \cite{dadhich2021predictive}. In Anusha Garlapati's research, she also used ARIMA to forecast stock prices and concluded that ARIMA is a good model for predicting stock prices \cite{garlapati2021stock}.\\ 
+Manish Dadhich studied and applied the ARIMA model for short-term forecasting of BSE and NSE stock prices. After carrying out his research, Manish Dadhich demonstrated the strength of the ARIMA model in predicting daily closing prices of time series data \cite{dadhich2021predictive}. In Anusha Garlapati's research, she also used ARIMA to forecast stock prices and concluded that ARIMA is a good model for predicting stock prices \cite{garlapati2021stock}.
 
-Yongqiong Zhu \cite{ZhuRNN} applied an RNN model to predict the stock prices of Apple. The training dataset spanned 10 years with 65\% allocated for training and the remaining 3\% for testing. With 50 epochs, Adam optimization, and Mean Squared Error (MSE) as the loss function, the model achieved highly favorable outcomes. It attained a predictive accuracy exceeding 95\%, with a reported loss value of 0.1\%. In 2015, Xiao Ding \cite{DingGRU} also proposed a deep learning method for event-driven stock market prediction.\\
+Yongqiong Zhu \cite{ZhuRNN} applied an RNN model to predict the stock prices of Apple. The training dataset spanned 10 years with 65\% allocated for training and the remaining 3\% for testing. With 50 epochs, Adam optimization, and Mean Squared Error (MSE) as the loss function, the model achieved highly favorable outcomes. It attained a predictive accuracy exceeding 95\%, with a reported loss value of 0.1\%. In 2015, Xiao Ding \cite{DingGRU} also proposed a deep learning method for event-driven stock market prediction.
 
-Shejul et al. \cite{ShejulGRU} compared the performance of the Gated Recurrent Unit (GRU) and Bidirectional Long Short-Term Memory (BiLSTM) models in predicting stock prices. Experimental results indicate that both models accurately forecast future stock prices, with the BiLSTM model outperforming the GRU model. Despite this, the GRU model demonstrates nearly double the speed of the BiLSTM model due to its simpler architecture. Overall, both models offer precise predictions and can effectively anticipate future stock market trends.\\
+Shejul et al. \cite{ShejulGRU} compared the performance of the Gated Recurrent Unit (GRU) and Bidirectional Long Short-Term Memory (BiLSTM) models in predicting stock prices. Experimental results indicate that both models accurately forecast future stock prices, with the BiLSTM model outperforming the GRU model. Despite this, the GRU model demonstrates nearly double the speed of the BiLSTM model due to its simpler architecture. Overall, both models offer precise predictions and can effectively anticipate future stock market trends.
 
-C. Fjellström (2022) \cite{fjellstrom2022lstm} explored an LSTM ensemble for stock price prediction in the paper "Long Short-Term Memory Neural Network for Financial Time Series." The work demonstrates superior performance over traditional portfolios, offering insights into LSTM's potential for financial forecasting and strategies for enhancing model accuracy and reducing market risk. S. Mehtab, J. Sen (2020) \cite{mehtab2020stock} proposed a deep learning approach for stock price prediction by employing Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) networks. Their work contributes to the field by exploring the effectiveness of this combined deep learning architecture in forecasting the NIFTY 50 index prices. They further emphasize the importance of data pre-processing and model evaluation, providing a methodological blueprint for financial market analysis using deep learning techniques.\\
+C. Fjellström (2022) \cite{fjellstrom2022lstm} explored an LSTM ensemble for stock price prediction in the paper "Long Short-Term Memory Neural Network for Financial Time Series." The work demonstrates superior performance over traditional portfolios, offering insights into LSTM's potential for financial forecasting and strategies for enhancing model accuracy and reducing market risk. S. Mehtab, J. Sen (2020) \cite{mehtab2020stock} proposed a deep learning approach for stock price prediction by employing Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) networks. Their work contributes to the field by exploring the effectiveness of this combined deep learning architecture in forecasting the NIFTY 50 index prices. They further emphasize the importance of data pre-processing and model evaluation, providing a methodological blueprint for financial market analysis using deep learning techniques.
 
-Chen et al.\cite{ChenFFT} used an Fast Fourier Transform algorithm to deal with historical training data for forecasting stock prices, achieving a more highly accurate. Experimental analysis is performed on datasets covering a seven-year period of both the Taiwan Stock Exchange Capitalization Weighted Stock Index (TAIEX) and the Dow-Jones Industrial Average (DJIA). \\
+Chen et al.\cite{ChenFFT} used an Fast Fourier Transform algorithm to deal with historical training data for forecasting stock prices, achieving a more highly accurate. Experimental analysis is performed on datasets covering a seven-year period of both the Taiwan Stock Exchange Capitalization Weighted Stock Index (TAIEX) and the Dow-Jones Industrial Average (DJIA). 
 
-A. Qingwen Jin et al. \cite{jin2019using} established predictive models using the Best Track TC dataset and the XGBOOST algorithm to anticipate Tropical Cyclone (TC) intensity in the Western North Pacific (WNP). Across six scenarios, the model achieved high accuracy with MAE < 4.50 m/s, CC > 0.89, and NRMSE < 10.00\%. The XGBOOST model exhibited superior performance compared to traditional Back-Propagation Neural Network (BPNN) models for the same predictors and independent prediction samples. A. O. A. A. A. Tianqi Chen and Carlos Guestrin (2016)\cite{chen2016xgboost} introduced XGBoost, a scalable tree boosting system. The paper describes the architecture of XGBoost and its core algorithms, presenting improvements to enhance performance and accuracy across a variety of machine learning tasks.\\
+A. Qingwen Jin et al. \cite{jin2019using} established predictive models using the Best Track TC dataset and the XGBOOST algorithm to anticipate Tropical Cyclone (TC) intensity in the Western North Pacific (WNP). Across six scenarios, the model achieved high accuracy with MAE < 4.50 m/s, CC > 0.89, and NRMSE < 10.00\%. The XGBOOST model exhibited superior performance compared to traditional Back-Propagation Neural Network (BPNN) models for the same predictors and independent prediction samples. A. O. A. A. A. Tianqi Chen and Carlos Guestrin (2016)\cite{chen2016xgboost} introduced XGBoost, a scalable tree boosting system. The paper describes the architecture of XGBoost and its core algorithms, presenting improvements to enhance performance and accuracy across a variety of machine learning tasks.
 
 Fully Convolutional Networks (FCNs) have been studied and applied in various fields related to image data processing and semantic segmentation. According to Shima Nabiee's research on stock trend prediction, FCNs have also been proven to be a powerful and flexible tool, enabling the analysis and prediction of stock price trends based on raw data \cite{nabiee2023stock}.
 \section{Materials}
@@ -347,66 +344,348 @@ Hidden state ($h_t$):
 \item $C_t$ is the memory cell state at time $t$.
 \item $h_t$ is the hidden state at time $t$.
 \end{itemize}
->>>>>>> origin/week5_NguyenHuuThanh
 
-% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+\section{Result}
+\subsection{Evaluation Methods}
+\textbf{Mean Percentage Absolute Error} (MAPE): is the average percentage error in a set of predicted values.\\
+\[MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} |  = 1 \]\\
+\textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.\\
+\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]\\
+\textbf{Mean Absolute Error} (MAE): is the average absolute differences between the expected and actual values.\\
+\[MAE= \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{g}_i| \]\\
+Where: \\
+	\indent\textbullet\ \(n\) is the number of observations in the dataset.\\
+	\indent\textbullet\ \(y_i\)  is the true value.\\
+	\indent\textbullet\ \(\hat{y_i}\) is the predicted value.
+
+\subsection{ACB dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+         \multirow{3}{*}{ARIMA} 
+         & 7:3  & 3932.5798 & 13.7514 & 3308.4751 \\ 
+         & 8:2 & 1542.0814 & 4.8217 & 1224.8404 \\ 
+         & \textcolor{red}{9:1} & \textcolor{red}{1238.2448} & \textcolor{red}{3.8899} & \textcolor{red}{997.3810} \\
+         \hline
+         \multirow{3}{*}{GRU} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{394.5391} & \textcolor{red}{1.007} & \textcolor{red}{244.3960} \\ 
+         & 8:2 & 476.5528 & 1.2615 & 297.4063 \\ 
+         & 9:1 & 765.6026 & 1.5120 & 411.5345 \\
+         \hline
+         \multirow{3}{*}{FCN} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{761.2610} & \textcolor{red}{0.0160} & \textcolor{red}{665.6353} \\ 
+         & 8:2 & 791.9841 & 0.0234 & 593.1706 \\ 
+         & 9:1 & 810.7567 & 0.0259 & 596.3067 \\
+         \hline
+         \multirow{3}{*}{RNN} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{448.0029} & \textcolor{red}{1.1568} & \textcolor{red}{281.8691} \\ 
+         & 8:2 & 470.8093 & 1.4700 & 293.8402 \\ 
+         & 9:1 & 810.3059 & 1.4771 & 512.4873 \\
+         \hline
+         \multirow{3}{*}{LSTM} 
+         & 7:3 & 531.4864 & 1.4123 & 363.7865 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{493.5754} & \textcolor{red}{1.2753} & \textcolor{red}{329.8735} \\ 
+         & 9:1 & 575.0604 & 1.6582 & 426.0182 \\
+         \hline
+         \multirow{3}{*}{FFT} 
+         & 7:3 & 12402.8913 & 50.2753 & 11653.0983 \\ 
+         & 8:2 & 4641.5937 & 18.8262 & 4368.4796 \\ 
+         & \textcolor{red}{9:1}  & \textcolor{red}{5794.8085} & \textcolor{red}{13.1265} & \textcolor{red}{4777.7704} \\
+         \hline
+         \multirow{3}{*}{XGBOOST} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{404.4547} & \textcolor{red}{1.1835} & \textcolor{red}{288.2362} \\ 
+         & 8:2 & 431.8621 & 1.5538 & 337.4326 \\ 
+         & 9:1 & 797.5681 & 2.2187 & 616.6294 \\
+         \hline
+         \multirow{3}{*}{LR} 
+         & 7:3 & 9134.5335 & 6.7563 & 1721.6769 \\ 
+         & 8:2 & 3512.4499 & 11.5962 & 3100.1106 \\ 
+         & \textcolor{red}{9:1}  & \textcolor{red}{1797.1567} & \textcolor{red}{5.5612} & \textcolor{red}{1449.3393} \\ 
+         \hline
+    \end{tabular}
+    \caption{ACB Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+Based on the table, we conclude that the GRU model with a 7:3 proportion is the best choice for forecasting ACB's stock prices over the next 30 days, as it achieves the low values in RMSE, MAPE, MAE.
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-ACB.png}
+    \caption{ARIMA model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-ACB.png}
+    \caption{GRU model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-ACB.png}
+    \caption{FCN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-ACB.png}
+    \caption{RNN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-ACB.png}
+    \caption{LSTM model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-ACB.png}
+    \caption{FFT model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-ACB.png}
+    \caption{XGBoost model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LR-ACB.png}
+    \caption{Linear Regression model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\subsection{BID dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+         \multirow{3}{*}{ARIMA} 
+         & 7:3 & 9563.7477 & 19.8847 & 8620.5906 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{6464.7779} & \textcolor{red}{10.0109} & \textcolor{red}{4764.1887} \\ 
+         & 9:1 & 6158.2991 & 10.6520 & 5292.1888 \\
+         \hline
+         \multirow{3}{*}{GRU} 
+         & 7:3 & 811.9859 & 1.3382 & 586.6200 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{804.1871} & \textcolor{red}{1.2751} & \textcolor{red}{584.2526} \\
+         & 9:1 & 1047.6395 & 1.4999 & 744.9879 \\
+         \hline
+         \multirow{3}{*}{FCN} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{1636.2305} & \textcolor{red}{0.0317} & \textcolor{red}{1336.0777} \\ 
+         & 8:2 & 2481.7959 & 0.0432 & 2005.2779 \\ 
+         & 9:1 & 2552.3799 & 0.0446 & 2247.3583 \\
+         \hline
+         \multirow{3}{*}{RNN} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{730.3118} & \textcolor{red}{1.2270} & \textcolor{red}{533.1443} \\ 
+         & 8:2 & 831.5655 & 1.3253 & 603.7621 \\ 
+         & 9:1 & 920.7904 & 1.2527 & 617.9939 \\
+         \hline
+         \multirow{3}{*}{LSTM} 
+         & 7:3 & 531.4864 & 1.4123 & 339.2725 \\ 
+         & \textcolor{red}{8:2}  & \textcolor{red}{493.5754} & \textcolor{red}{1.2753} & \textcolor{red}{329.8735} \\ 
+         & 9:1 & 577.0604 & 1.6582 & 426.0182 \\
+         \hline
+         \multirow{3}{*}{FFT} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{4894.1684} & \textcolor{red}{11.6059} & \textcolor{red}{5783.9707} \\
+         & 8:2 & 6459.4307 & 12.6873 & 5674.0699 \\ 
+         & 9:1 & 8002.1502 & 12.4200 & 6248.1023 \\
+         \hline
+         \multirow{3}{*}{XGBOOST} 
+         & \textcolor{red}{7:3}  & \textcolor{red}{2908.0631} & \textcolor{red}{3.8156} & \textcolor{red}{4318.2261} \\ 
+         & 8:2 & 3206.6953 & 3.9514 & 3670.8829 \\ 
+         & 9:1 & 3752.4153 & 7.2912 & 3620.9575 \\
+         \hline
+         \multirow{3}{*}{LR} 
+         & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{4496.2716} \\
+         & 8:2 & 6678.0104 & 12.9205 & 5097.8035 \\ 
+         & 9:1 & 8699.7701 & 19.1198 & 7686.7608 \\
+         \hline
+    \end{tabular}
+    \caption{BID Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+
+Based on the evaluation table, the LSTM model with an 8:2 training/testing ratio provides the best prediction results for BID stock prices, with the lowest RMSE (493.5754), MAPE (1.2753), and MAE (329.8735). GRU is also a strong choice with similar performance at the same ratio. Overall, LSTM stands out as the top choice for predicting BID stock prices.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-BID.png}
+    \caption{ARIMA model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-BIDV.png}
+    \caption{GRU model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-BID.png}
+    \caption{FCN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-BID.png}
+    \caption{RNN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-BID.png}
+    \caption{LSTM model’s result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-BID.png}
+    \caption{FFT model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-BID.png}
+    \caption{XGBoost model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LR-BID.png}
+    \caption{Linear Regression model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+
+\section{ORIENTATION}
+The report can be expanded and improved by enhancing evaluation methods such as  perform sensitivity analysis to better understand the influence of each input factor on the forecasting results. Secondly, develop Real-Time Forecasting Systems like create a real-time forecasting system to continuously provide investment recommendations to investors. These development directions will help improve the accuracy and applicability of forecasting models, better supporting investors in making informed decisions.
+
 \begin{thebibliography}{00}
 \bibitem{cakra2015stock}
-Yahya Eru Cakra and Bayu Distiawan Trisedya. "Stock price prediction using linear regression based on sentiment analysis." In: 2015 International Conference on Advanced Computer Science and Information Systems (ICACSIS). IEEE, 2015. pp. 147-154.
+Cakra, Y. E., \& Trisedya, B. D. (2015, October). Stock price prediction using linear regression based on sentiment analysis. In 2015 international conference on advanced computer science and information systems (ICACSIS) (pp. 147-154). IEEE.
 \bibitem{uras2020forecasting}
-Nicola Uras, et al. "Forecasting Bitcoin closing price series using linear regression and neural networks models." PeerJ Computer Science, vol. 6, 2020, article e279.
+Uras, N., Marchesi, L., Marchesi, M., \& Tonelli, R. (2020). Forecasting Bitcoin closing price series using linear regression and neural networks models. PeerJ Computer Science, 6, e279.
 \bibitem{dadhich2021predictive}
-Manish Dadhich, et al. ``Predictive models for stock market index using stochastic time series ARIMA modeling in emerging economy.'' In: Advances in Mechanical Engineering: Select Proceedings of CAMSE 2020. Springer Singapore, 2021. pp. 281-290.
+Dadhich, M., Pahwa, M. S., Jain, V., \& Doshi, R. (2021). Predictive models for stock market index using stochastic time series ARIMA modeling in emerging economy. In Advances in Mechanical Engineering: Select Proceedings of CAMSE 2020 (pp. 281-290). Springer Singapore.
 \bibitem{garlapati2021stock}
-Anusha Garlapati, et al. ``Stock price prediction using Facebook Prophet and ARIMA models.'' In: 2021 6th International Conference for Convergence in Technology (I2CT). IEEE, 2021. pp. 1-7.
+Garlapati, A., Krishna, D. R., Garlapati, K., Rahul, U., \& Narayanan, G. (2021, April). Stock price prediction using Facebook Prophet and Arima models. In 2021 6th International Conference for Convergence in Technology (I2CT) (pp. 1-7). IEEE.
 \bibitem{ZhuRNN}
-Zhu Y. Stock price prediction using the RNN model. InJournal of Physics: Conference Series 2020 Oct 1 (Vol. 1650, No. 3, p. 032103). IOP Publishing. 
+Zhu, Y. (2020, October). Stock price prediction using the RNN model. In Journal of Physics: Conference Series (Vol. 1650, No. 3, p. 032103). IOP Publishing.
 \bibitem{DingGRU}
-Ding X, Zhang Y, Liu T, Duan J. Deep learning for event-driven stock prediction. InTwenty-fourth international joint conference on artificial intelligence 2015 Jun 25.
+Ding, X., Zhang, Y., Liu, T., \& Duan, J. (2015, June). Deep learning for event-driven stock prediction. In Twenty-fourth international joint conference on artificial intelligence.
 \bibitem{ShejulGRU}
-Shejul, A.A., Chaudhari, A., Dixit, B.A., Lavanya, B.M. (2023). Stock Price Prediction Using GRU, SimpleRNN and LSTM. In: Kulkarni, A.J., Mirjalili, S., Udgata, S.K. (eds) Intelligent Systems and Applications. Lecture Notes in Electrical Engineering, vol 959. Springer, Singapore 
-
+Shejul, A. A., Chaudhari, A., Dixit, B. A., \& Lavanya, B. M. (2023). Stock Price Prediction Using GRU, SimpleRNN and LSTM. In Intelligent Systems and Applications: Select Proceedings of ICISA 2022 (pp. 529-535). Singapore: Springer Nature Singapore.
 \bibitem{fjellstrom2022lstm}
-Carmina Fjellström. "Long Short-Term Memory Neural Network for Financial Time Series." arXiv:2201.08218v1 [q-fin.ST], 20 Jan 2022.
+Fjellström, C. (2022, December). Long short-term memory neural network for financial time series. In 2022 IEEE International Conference on Big Data (Big Data) (pp. 3496-3504). IEEE.
 \bibitem{mehtab2020stock}
-Sidra Mehtab and Jaydip Sen. "Stock Price Prediction Using CNN and LSTM-Based Deep Learning Mode." Department of Data Science, Praxis Business School, Kolkata, INDIA. Accepted version of paper presented at 2020 International Conference on Decision Aid Sciences and Applications (DASA’20), Bahrain, November 8 – 9, 2020.
-
+Mehtab, S., \& Sen, J. (2020, November). Stock price prediction using CNN and LSTM-based deep learning models. In 2020 International Conference on Decision Aid Sciences and Application (DASA) (pp. 447-453). IEEE.
 \bibitem{ChenFFT}
-Chen MY, Chen BT. Online fuzzy time series analysis based on entropy discretization and a Fast Fourier Transform. Applied Soft Computing. 2014 Jan 1;14:156-66. 
-
+Chen, M. Y., \& Chen, B. T. (2014). Online fuzzy time series analysis based on entropy discretization and a Fast Fourier Transform. Applied Soft Computing, 14, 156-166.
 \bibitem{jin2019using}
-Qingwen Jin, Xiangtao Fan, Jian Liu, Zhuxin Xue, and Hongdeng Jian. "Using eXtreme Gradient BOOSTing to Predict Changes in Tropical Cyclone Intensity over the Western North Pacific." Atmosphere, vol. 10, no. 6, 2019, pp. 341–.
+Jin, Q., Fan, X., Liu, J., Xue, Z., \& Jian, H. (2019). Using eXtreme Gradient BOOSTing to predict changes in tropical cyclone intensity over the Western North Pacific. Atmosphere, 10(6), 341.
 \bibitem{chen2016xgboost}
-Tianqi Chen (University of Washington) and Carlos Guestrin (University of Washington). "XGBoost: A Scalable Tree Boosting System."
+Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).
 \bibitem{nabiee2023stock}
-Shima Nabiee and Nader Bagherzadeh. "Stock Trend Prediction: A Semantic Segmentation Approach." arXiv preprint arXiv:2303.09323, 2023.
+Nabiee, S., \& Bagherzadeh, N. (2023). Stock Trend Prediction: A Semantic Segmentation Approach. arXiv preprint arXiv:2303.09323.
 
-% FFT
+
+% IV
 \bibitem{Gillian}
-Gillian Smith, " The Fast Fourier Transform and its Applica-
-tions ",\url{ https://www.maths.ed.ac.uk/~ateckent/vacation_reports/summer_ project_gillian_smith.pdf}, Accessed August 2019.
+Smith, G. (2019). The fast fourier transform and its applications. Edingburgh: University of Edingburg.
+
+
+
 
 \bibitem{Musbah}
-Musbah, H., El-Hawary, M., \& Aly, H. (2019). Identifying Seasonality in
-Time Series by Applying Fast Fourier Transform. 2019 IEEE Electrical
-Power and Energy Conference (EPEC).
+Musbah, H., El-Hawary, M., \& Aly, H. (2019, October). Identifying seasonality in time series by applying fast fourier transform. In 2019 IEEE Electrical Power and Energy Conference (EPEC) (pp. 1-4). IEEE.
 
 \bibitem{Roberts}
-S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform". Available at:
-\url{https://www.robots.ox.ac.uk/~sjrob/Teaching/SP/l7.pdf}. Accessed: 2000.
+S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform".
 
 \bibitem{busin}
-Evans, J. R., *Business Analytics: Methods, Models, and Decisions*. Hoboken, NJ: Wiley, 2013, p. 276.
+Evans, J. R. (2017). Business analytics: Methods, models, and decisions. Pearson.
 
 \bibitem{Xgboost}
-T. Chen and C. Guestrin, "XGBoost: A Scalable Tree Boosting System," arXiv:1603.02754v3 [cs.LG], June 10, 2016.
+Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).
 
 \bibitem{geekXGboost}
 P. Pawangfg, "XGBoost," GeeksforGeeks, Available: https://www.geeksforgeeks.org/xgboost/. [Accessed: 06-Feb-2023].
 
 %GRU
 \bibitem{Yamak}
-Yamak, P. T., Yujian, L., & Gadosey, P. K. (2019, December). A comparison between arima, lstm, and gru for time series forecasting. In Proceedings of the 2019 2nd international conference on algorithms, computing and artificial intelligence (pp. 49-55).
+Yamak, P. T., Yujian, L., \& Gadosey, P. K. (2019, December). A comparison between arima, lstm, and gru for time series forecasting. In Proceedings of the 2019 2nd international conference on algorithms, computing and artificial intelligence (pp. 49-55).
 %FCN
 \bibitem{Ismail}
 Ismail Fawaz, H., Forestier, G., Weber, J., Idoumghar, L., \& Muller, P. A. (2019). Deep learning for time series classification: a review. Data mining and knowledge discovery, 33(4), 917-963.
@@ -414,9 +693,9 @@ Ismail Fawaz, H., Forestier, G., Weber, J., Idoumghar, L., \& Muller, P. A. (201
 \bibitem{IBM}
 IBM Technology company, “What are recurrent neural networks?”, Available at: \url{https://www.ibm.com/topics/recurrent-neural-networks}
 \bibitem{Chung}
-Chung, Junyoung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. "Empirical evaluation of gated recurrent neural networks on sequence modeling." arXiv preprint arXiv:1412.3555 (2014).
+Chung, J., Gulcehre, C., Cho, K., \& Bengio, Y. (2014). Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555.
 \bibitem{standford}
-A. Amidi and S. Amidi, "Recurrent Neural Networks Cheatsheet," Stanford University, [Online]. Available: \url{https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks}. [Accessed: 29-May-2024]. 
+A. Amidi and S. Amidi, "Recurrent Neural Networks Cheatsheet," Stanford University, [Online].
 
 
 
