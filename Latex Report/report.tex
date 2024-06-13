@@ -492,9 +492,7 @@ Based on the table, we conclude that the GRU model with a 7:3 proportion is the 
   \end{minipage}
 \end{figure}
 
-<<<<<<< HEAD
 
-=======
 \subsection{BID dataset} 
 \begin{table}[H]
     \centering
@@ -630,9 +628,142 @@ Based on the evaluation table, the LSTM model with an 8:2 training/testing ratio
     \label{fig8}
   \end{minipage}
 \end{figure}
->>>>>>> origin/week6_TranTrucQuynh
 
 
+
+
+
+\subsection{VCB dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}} \\ \hline
+    \centering Model & Proportion & RMSE & MAPE (\%) & MAE \\ \hline
+        \multirow{3}{*}{ARIMA} & 7:3 & 39861.8637 & 41.9820 & 36312.4125 \\
+        & 8:2 & 16889.0992 & 15.3808 & 13728.8500 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{3827.0147} & \textcolor{red}{3.5494} & \textcolor{red}{3130.8613} \\ \hline
+        \multirow{3}{*}{GRU} & 7:3 & 1224.6726 & 1.0457 & 912.9100 \\
+        & 8:2 & 1314.5240 & 1.1061 & 989.5174 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{829.2120} & \textcolor{red}{0.7164} & \textcolor{red}{656.1504} \\ \hline
+        \multirow{3}{*}{FCN} & \textcolor{red}{7:3} & \textcolor{red}{2192.3873} & \textcolor{red}{0.0202} & \textcolor{red}{1712.1799} \\
+        & 8:2 & 3943.3529 & 0.039 & 3509.7156 \\
+        & 9:1 & 2773.4293 & 0.0234 & 2163.6424 \\ \hline
+        \multirow{3}{*}{RNN} & 7:3 & 1697.2557 & 1.5721 & 1348.6940 \\
+        & 8:2 & 1537.9391 & 1.3413 & 1185.1081 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{872.8985} & \textcolor{red}{0.7490} & \textcolor{red}{682.9690} \\ \hline
+        \multirow{3}{*}{LSTM} & 7:3 & 1902.6655 & 1.8272 & 1648.573 \\
+        & 8:2 & 2788.466 & 2.8693 & 2580.269 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{1135.6407} & \textcolor{red}{0.9596} & \textcolor{red}{851.0078} \\ \hline
+        \multirow{3}{*}{FFT} & \textcolor{red}{7:3} & \textcolor{red}{5304.4333} & \textcolor{red}{4.7513} & \textcolor{red}{4075.0324} \\
+        & 8:2 & 10602.9959 & 10.4838 & 9349.2730 \\
+        & 9:1 & 10551.3341 & 9.4645 & 8695.5248 \\ \hline
+        \multirow{3}{*}{XGBOOST} & 7:3 & 3682.6546 & 3.308 & 2924.0263 \\
+        & 8:2 & 4647.9822 & 4.4902 & 3.990 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{1698.2616} & \textcolor{red}{1.5916} & \textcolor{red}{1462.3939} \\ \hline
+        \multirow{3}{*}{LR} & 7:3 & 6987.9849 & 7.1427 & 5818.5129 \\
+        & 8:2 & 9168.4296 & 10.5427 & 8439.4780 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{6673.7497} & \textcolor{red}{6.9101} & \textcolor{red}{5853.9128} \\ \hline
+        \end{tabular}
+    \caption{VCB Dataset's Evaluation}
+    \label{tab:dataset_evaluation}
+\end{table}
+
+Based on the table, we conclude that the GRU model with
+a 7:3 proportion is the best choice for forecasting VCB’s
+stock prices over the next 30 days, as it achieves the low
+values in RMSE(829.2120), MAPE(0.7164), MAE(656.1504)
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-VCB.png}
+    \caption{ARIMA model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-VCB.png}
+    \caption{GRU model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-VCB.png}
+    \caption{FCN model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-VCB-9-1.png}
+    \caption{RNN model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-VCB.png}
+    \caption{LSTM model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-VCB.png}
+    \caption{FFT model’s result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-VCB.png}
+    \caption{XGBoost model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.6\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/diagram/LR-VCB.png}
+    \caption{LR model’s result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+
+
+\section{Conclusion}
+Based on the summary table of the accuracy of 8 models (ARIMA, GRU, FCN, RNN, LSTM, FFT, XGBoost, and Linear Regression) for 3 datasets (ACB, BID, and VCB) with 3 train-test ratios (7:3, 8:2, and 9:1), we can draw some notable conclusions:
+
+GRU and RNN demonstrate impressive performance across all three datasets and all train-test ratios. Their RMSE, MAPE, and MAE scores are significantly lower compared to the ARIMA, FFT, and Linear Regression models. GRU is also a strong choice with similar performance when the train-test ratio is 8:2. XGBoost also shows good performance, especially with train-test ratios of 7:3 and 8:2, outperforming traditional models.
+
+LSTM, with a train-test ratio of 8:2, gives the best prediction results for BID stock prices, with the lowest RMSE, MAPE, and MAE, but it is not as stable as GRU and RNN. Its results are generally average compared to other models, but overall, LSTM stands out and is the top choice for predicting BID stock prices. FCN shows positive results with ACB and BID but is not stable with VCB.
 \section{ORIENTATION}
 The report can be expanded and improved by enhancing evaluation methods such as  perform sensitivity analysis to better understand the influence of each input factor on the forecasting results. Secondly, develop Real-Time Forecasting Systems like create a real-time forecasting system to continuously provide investment recommendations to investors. These development directions will help improve the accuracy and applicability of forecasting models, better supporting investors in making informed decisions.
 
