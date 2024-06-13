@@ -31,12 +31,11 @@
 {Author \headeretal: Tran Truc Quynh,Nguyen Huu Thanh,Luong Thi Thuy Diem}
 
 \begin{abstract}
-The stock market has assumed a significant position within investment portfolios, as evidenced by the recent surge in investor participation within Vietnam's market. However, navigating the inherent volatility of stock prices requires experience and robust analytical tools. This paper seeks to empower investors by employing various forecasting models such as Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to analyze price trends within three prominent bank stocks: ACB, BIDV, VCB traded on Hochiminh Stock Exchange (HOSE) over a five-year period (2019-2024). By evaluating the effectiveness of these models using RMSE, MAPE, and MSLE techniques. This paper aims to equip investors for informed stock selection within their portfolios, ultimately contributing to more accurate decision-making.
+The stock market has increasingly become a focal point within investment portfolios, as demonstrated by the recent surge in investor participation in Vietnam’s market. However, navigating the inherent volatility of stock prices requires experience and robust analytical tools. This paper seeks to empower investors by employing various forecasting models such as Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to analyze price trends within three prominent bank stocks: ACB, BIDV, VCB traded on Hochiminh Stock Exchange (HOSE) over a five-year period (2019-2024). By evaluating the effectiveness of these models using RMSE, MAPE, and MSLE techniques. The main contribution of this study is to provide investors with a comparative analysis of forecasting models, thereby equipping them with insights for informed stock selection and enhancing decision-making accuracy.
 \end{abstract}
 
 \begin{keywords}
-Time Series Analysis, Machine Learning, Financial Forecasting, Vietnamese Stock Market,
-GRU, RNN, ARIMA, LSTM, FFT, XGBoost, FCN, Linear Regression.
+Time Series Analysis, Machine Learning, Financial Forecasting, Vietnamese Stock Market, GRU, RNN, ARIMA, LSTM, FFT, XGBoost, FCN, Linear Regression.
 \end{keywords}
 
 \titlepgskip=-15pt
@@ -398,9 +397,9 @@ Where: \\
          & \textcolor{red}{9:1}  & \textcolor{red}{5794.8085} & \textcolor{red}{13.1265} & \textcolor{red}{4777.7704} \\
          \hline
          \multirow{3}{*}{XGBOOST} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{404.4547} & \textcolor{red}{1.1835} & \textcolor{red}{288.2362} \\ 
-         & 8:2 & 431.8621 & 1.5538 & 337.4326 \\ 
-         & 9:1 & 797.5681 & 2.2187 & 616.6294 \\
+         & \textcolor{red}{7:3}  & \textcolor{red}{419.3048} & \textcolor{red}{1,2042} & \textcolor{red}{293.4514} \\ 
+         & 8:2 & 564.2950 & 1,6432 & 415.7110 \\ 
+         & 9:1 & 871.8973 & 2.2187 & 611.6353 \\
          \hline
          \multirow{3}{*}{LR} 
          & 7:3 & 9134.5335 & 6.7563 & 1721.6769 \\ 
@@ -492,7 +491,6 @@ Based on the table, we conclude that the GRU model with a 7:3 proportion is the 
   \end{minipage}
 \end{figure}
 
-
 \subsection{BID dataset} 
 \begin{table}[H]
     \centering
@@ -533,9 +531,9 @@ Based on the table, we conclude that the GRU model with a 7:3 proportion is the 
          & 9:1 & 8002.1502 & 12.4200 & 6248.1023 \\
          \hline
          \multirow{3}{*}{XGBOOST} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{2908.0631} & \textcolor{red}{3.8156} & \textcolor{red}{4318.2261} \\ 
-         & 8:2 & 3206.6953 & 3.9514 & 3670.8829 \\ 
-         & 9:1 & 3752.4153 & 7.2912 & 3620.9575 \\
+         & \textcolor{red}{7:3}  & \textcolor{red}{3932.2959} & \textcolor{red}{7.0085} & \textcolor{red}{3206.8939} \\ 
+         & 8:2 & 5022.5343 & 8.7570 & 4248.0894 \\ 
+         & 9:1 & 5515.6624 & 10.9510 & 5428.8339 \\
          \hline
          \multirow{3}{*}{LR} 
          & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{4496.2716} \\
@@ -628,7 +626,6 @@ Based on the evaluation table, the LSTM model with an 8:2 training/testing ratio
     \label{fig8}
   \end{minipage}
 \end{figure}
-
 
 
 
