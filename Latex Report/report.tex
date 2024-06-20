@@ -347,7 +347,38 @@ h_t = (z_t \ast c_t) + ((1 - z_t) \ast h_{t-1})
 \end{figure}
 
 \subsection{Fully Convolutional Network (FCN)}
+Each layer output in a convnet is a three-dimensional array
+of size $h \times w \times d$, where $h$ and $w$ are spatial dimensions, and
+$d$ is the feature or channel dimension. The first layer is the
+image, with pixel size $h \times w$, and $d$ channels. Locations in
+higher layers correspond to the locations in the image they
+are path-connected to, which are called their receptive fields.
+Convnets are inherently translation invariant. Their basic components (convolution, pooling, and activation functions) operate on local input regions, and depend only on
+relative spatial coordinates. Writing $x_{ij}$ for the data vector at
+location $(i, j)$ in a particular layer, and $y_{ij}$ for the following
+layer, these functions compute outputs $y_{ij}$ by:
 
+\[
+y_{ij} = f_{ks} \left( \{x_{si+\delta_i, sj+\delta_j}\}_{0 \le \delta_i, \delta_j < k} \right)
+\]
+
+where $k$ is called the kernel size, $s$ is the stride or subsampling factor, and $f_{ks}$ determines the layer type: a matrix
+multiplication for convolution or average pooling, a spatial
+max for max pooling, or an elementwise nonlinearity for an
+activation function, and so on for other types of layers.
+This functional form is maintained under composition,
+with kernel size and stride obeying the transformation rule:
+
+\[
+f_{ks} \circ g_{k's'} = (f \circ g)_{k' + (k-1)s', ss'}
+\]
+
+While a general net computes a general nonlinear function,
+a net with only layers of this form computes a nonlinear
+filter, which we call a deep filter or fully convolutional network.
+An FCN naturally operates on an input of any size, and
+produces an output of corresponding (possibly resampled)
+spatial dimensions.\cite{Ismail}
 
 \begin{figure}[H]
     \centering
@@ -485,6 +516,131 @@ values in RMSE, MAPE, MAE. These models can potentially offer better insights an
     \end{minipage}
 \end{figure}
 
+\subsection{BID dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+         \multirow{3}{*}{ARIMA} 
+         & 7:3 & 9563.7477 & 19.8847 & 8620.5906 \\ 
+         & \textcolor{red}{8:2} & \textcolor{red}{6464.7779} & \textcolor{red}{10.0109} & \textcolor{red}{4764.1887} \\ 
+         & 9:1 & 6158.2991 & 10.6520 & 5292.1888 \\
+         \hline
+         \multirow{3}{*}{GRU} 
+         & \textcolor{red}{7:3} & \textcolor{red}{749.0815} & \textcolor{red}{1.2404} & \textcolor{red}{525.8805} \\ 
+         & 8:2 & 782.4308 & 1.2474 & 552.8802 \\
+         & 9:1 & 964.3091 & 1.3533 & 677.6551 \\
+         \hline
+         \multirow{3}{*}{FCN} 
+         & 7:3 & 2259.3188 & 4.6895 & 1954.8440 \\ 
+         & \textcolor{red}{8:2} & \textcolor{red}{1192.5075} & \textcolor{red}{1.9916} & \textcolor{red}{895.5052} \\ 
+         & 9:1 & 1356.9802 & 2.0289 & 1015.2221 \\
+         \hline
+         \multirow{3}{*}{RNN} 
+         & \textcolor{red}{7:3} & \textcolor{red}{1001.5601} & \textcolor{red}{1.8226} & \textcolor{red}{771.9509} \\ 
+         & 8:2 & 1103.2342 & 2.0474 & 891.3108 \\ 
+         & 9:1 & 1074.0008 & 1.6376 & 805.7158 \\
+         \hline
+         \multirow{3}{*}{LSTM} 
+         & \textcolor{red}{7:3} & \textcolor{red}{820.0516} & \textcolor{red}{1.3974} & \textcolor{red}{593.1434} \\ 
+         & 8:2 & 847.0286 & 1.3657 & 606.8658 \\ 
+         & 9:1 & 1024.1498 & 1.4659 & 733.4891 \\
+         \hline
+         \multirow{3}{*}{FFT} 
+         & \textcolor{red}{7:3} & \textcolor{red}{5736.0835} & \textcolor{red}{11.4603} & \textcolor{red}{4838.2472} \\
+         & 8:2 & 5971.8017 & 11.4028 & 5100.2349 \\ 
+         & 9:1 & 7792.9476 & 11.9885 & 6037.3514 \\
+         \hline
+         \multirow{3}{*}{XGBOOST} 
+         & \textcolor{red}{7:3} & \textcolor{red}{3225.2175} & \textcolor{red}{4.2320} & \textcolor{red}{2005.3957} \\ 
+         & 8:2 & 4007.5167 & 5.4957 & 2702.9580 \\ 
+         & 9:1 & 6153.4990 & 10.9518 & 5571.4794 \\
+         \hline
+         \multirow{3}{*}{LR} 
+         & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{1845.6229} \\
+         & 8:2 & 6678.0104 & 12.9205 & 5097.8035 \\ 
+         & 9:1 & 8699.7701 & 19.1198 & 7686.7608 \\
+         \hline
+    \end{tabular}
+    \caption{BID Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+
+
+
+Based on the evaluation table, the GRU model with an 7:3 training/testing ratio provides the best prediction results for BID stock prices, with the lowest RMSE (749.0815), MAPE (1.2404\%), and MAE (525.8805). LSTM is also a strong choice with similar performance at the same ratio. Overall, GRU stands out as the top choice for predicting BID stock prices
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-BID.png}
+        \caption{ARIMA model’s result with 8:2 splitting proportion}
+        \label{fig:ARIMA-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/GRU-BID.png}
+        \caption{GRU model’s result with 7:3 splitting proportion}
+        \label{fig:GRU-BID}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FCN-BID.png}
+        \caption{FCN model’s result with 8:3 splitting proportion}
+        \label{fig:FCN-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/RNN-BID.png}
+        \caption{RNN model’s result with 7:3 splitting proportion}
+        \label{fig:RNN-BID}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-BID.png}
+        \caption{LSTM model’s result with 7:3 splitting proportion}
+        \label{fig:LSTM-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FFT-BID.png}
+        \caption{FFT model’s result with 7:3 splitting proportion}
+        \label{fig:FFT-BID}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-BID.png}
+        \caption{XGBoost model’s result with 7:3 splitting proportion}
+        \label{fig:XGBoost-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LR-BID.png}
+        \caption{Linear Regression model’s result with 7:3 splitting proportion}
+        \label{fig:LR-BID}
+    \end{minipage}
+\end{figure}
 
 
 \section{Conclusion}
