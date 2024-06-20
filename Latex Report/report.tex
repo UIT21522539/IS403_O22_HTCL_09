@@ -643,6 +643,136 @@ Based on the evaluation table, the GRU model with an 7:3 training/testing ratio 
 \end{figure}
 
 
+
+
+\subsection{VCB dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+        \multirow{3}{*}{ARIMA} 
+        & 7:3 & 39861.8637 & 41.9820 & 36312.4125 \\
+        & 8:2 & 16889.0992 & 15.3808 & 13728.8500 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{1238.2448} & \textcolor{red}{3.8899} & \textcolor{red}{997.3810} \\
+        \hline
+        \multirow{3}{*}{GRU} 
+        & 7:3 & 1164.3590 & \textcolor{red}{1.0174} & 857.2915 \\
+        & \textcolor{red}{8:2} & \textcolor{red}{1138.5327} & \textcolor{red}{0.9145} & \textcolor{red}{815.9355} \\
+        & 9:1 & 1398.7836 & 1.0759 & 984.8921 \\
+        \hline
+        \multirow{3}{*}{FCN} 
+        & 7:3 & 3824.7088 & 3.6075 & 3154.3828 \\
+        & 8:2 & 4811.8376 & 4.9807 & 4469.9363 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{2732.1560} & \textcolor{red}{2.3252} & \textcolor{red}{2142.9079} \\
+        \hline
+        \multirow{3}{*}{RNN} 
+        & 7:3 & 1619.5683 & 1.5273 & 1282.0946 \\
+        & 8:2 & 1743.8729 & 1.5051 & 1326.5244 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{1254.2616} & \textcolor{red}{0.9490} & \textcolor{red}{855.2889} \\
+        \hline
+        \multirow{3}{*}{LSTM} 
+        & 7:3 & 1697.3167 & 1.5419 & 1320.1187 \\
+        & \textcolor{red}{8:2} & \textcolor{red}{1151.5582} & \textcolor{red}{0.9525} & \textcolor{red}{847.6950} \\
+        & 9:1 & 1405.7421 & 1.0667 & 977.9067 \\
+        \hline
+        \multirow{3}{*}{FFT} 
+        & \textcolor{red}{7:3} & \textcolor{red}{7654.6091} & \textcolor{red}{8.0921} & \textcolor{red}{6359.1013} \\
+    
+        & 8:2 & 10661.2453 & 10.5581 & 9399.3536 \\
+       
+        & 9:1 & 9141.6520 & 8.1522 & 7465.4590 \\
+         \hline
+        \multirow{3}{*}{XGBOOST} 
+        & 7:3 & 3716.7589 & 3.0326 & 2705.8227 \\
+        & 8:2 & 4671.1649 & 4.0999 & 3751.2325 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{3350.2323} & \textcolor{red}{2.9121} & \textcolor{red}{2708.4345} \\
+        \hline
+        \multirow{3}{*}{LR} 
+        & 7:3 & 6987.9849 & 7.1427 & 5818.5129 \\
+        & 8:2 & 9168.4296 & 10.5427 & 8439.4780 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{6673.7497} & \textcolor{red}{6.9101} & \textcolor{red}{5853.9128} \\
+        \hline
+    \end{tabular}
+    \caption{VCB Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+Based on the error metrics table for predicting VCB stock prices, GRU emerges as the most accurate model with an 8:2 data split. RNN and LSTM also achieve high accuracy, with RNN performing best in the 9:1 split and LSTM performing best in the 8:2 split. Although ARIMA shows the best performance in the 9:1 split, it still lags behind neural network models like GRU, RNN, and LSTM. FFT and LR, despite some improvement in certain cases, exhibit high and unstable errors, indicating they are less suitable for this dataset.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-VCB.png}
+        \caption{ARIMA model’s result with 9:1 splitting proportion}
+        \label{fig:ARIMA-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/GRU-VCB.png}
+        \caption{GRU model’s result with 9:1 splitting proportion}
+        \label{fig:GRU-VCB}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FCN-VCB.png}
+        \caption{FCN model’s result with 7:3 splitting proportion}
+        \label{fig:FCN-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/RNN-VCB.png}
+        \caption{RNN model’s result with 9:1 splitting proportion}
+        \label{fig:RNN-VCB}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-VCB.png}
+        \caption{LSTM model’s result with 8:2 splitting proportion}
+        \label{fig:LSTM-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FFT-VCB.png}
+        \caption{FFT model’s result with 7:3 splitting proportion}
+        \label{fig:FFT-VCB}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-VCB.png}
+        \caption{XGBoost model’s result with 9:1 splitting proportion}
+        \label{fig:XGBoost-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LR-VCB.png}
+        \caption{LR model’s result with 9:1 splitting proportion}
+        \label{fig:LR-VCB}
+    \end{minipage}
+\end{figure}
+% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+
+
+
 \section{Conclusion}
 Based on the summary table of the accuracy of 8 models (ARIMA, GRU, FCN, RNN, LSTM, FFT, XGBoost, and Linear Regression) for 3 datasets (ACB, BID, and VCB) with 3 train-test ratios (7:3, 8:2, and 9:1), we can draw some notable conclusions:
 
