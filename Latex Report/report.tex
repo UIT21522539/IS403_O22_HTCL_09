@@ -11,13 +11,15 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{indentfirst}
+% package 2 pic in one row
+\usepackage{subfigure}
 
 \setlength{\parindent}{0.5cm}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \begin{document}
-\title{FORECASTING STOCK PRICES IN VIETNAM USING MACHINE LEARNING AND DEEP LEARNING MODELS}
+\title{PREDICTIVE MODELING OF VIETNAMESE BANK STOCKS: ASSESSING STATISTICAL, MACHINE LEARNING, AND DEEP LEARNING TECHNIQUES}
 
 \author{\uppercase{Tran Truc Quynh}\authorrefmark{1},
 \uppercase{Luong Thi Thuy Diem\authorrefmark{2}, and Nguyen Huu Thanh}\authorrefmark{3}}
@@ -31,7 +33,8 @@
 {Author \headeretal: Tran Truc Quynh,Nguyen Huu Thanh,Luong Thi Thuy Diem}
 
 \begin{abstract}
-The stock market has increasingly become a focal point within investment portfolios, as demonstrated by the recent surge in investor participation in Vietnam’s market. However, navigating the inherent volatility of stock prices requires experience and robust analytical tools. This paper seeks to empower investors by employing various forecasting models such as Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to analyze price trends within three prominent bank stocks: ACB, BIDV, VCB traded on Hochiminh Stock Exchange (HOSE) over a five-year period (2019-2024). By evaluating the effectiveness of these models using RMSE, MAPE, and MSLE techniques. The main contribution of this study is to provide investors with a comparative analysis of forecasting models, thereby equipping them with insights for informed stock selection and enhancing decision-making accuracy.
+The volatility of stock prices presents challenges for investors navigating the Vietnamese market, which has witnessed increased participation in recent years. This paper seeks to empower investors by evaluating the effectiveness of different forecasting models—specifically Linear Regression, ARIMA, RNN, GRU, LSTM, FFT, XGBoost, and FCN — in predicting price trends for three prominent bank stocks (ACB, BIDV, VCB) traded on the Hochiminh Stock Exchange (HOSE) over a five-year period (2019-2024). Through rigorous analysis and comparison using metrics such as RMSE, MAPE, and MAE. This study identifies the most effective forecasting model for each bank stock. Additionally, it evaluates the impact of different training/test ratio configurations on model performance, providing insights into optimal data partitioning strategies. The main contribution of this study is to provide investors with a comparative analysis of forecasting models, thereby equipping them with insights for informed stock selection and enhancing decision-making accuracy.
+
 \end{abstract}
 
 \begin{keywords}
@@ -182,6 +185,18 @@ Where:
     \item $p$ and $q$ are integers, often referred to as autoregressive and moving average parameters, respectively.
 \end{itemize}
 
+% Linear
+\subsection{Linear Regression}
+Linear regression is a statistical technique used to model the relationship between a dependent variable, \textit{Y}, and one or more independent variables, \textit{X}. The goal is to find the best-fitting straight line (or hyperplane in higher dimensions) that describes the relationship between the variables. 
+When there are multiple independent variables, the linear regression is called multivariable linear regression, with equation has the form \cite{busin}:
+ \[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+Where:\\
+	\indent\textbullet\ Y is the dependent variable.\\
+	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent variables.\\
+	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
+	\indent\textbullet\ \(\varepsilon\) is the error term.
+
 \subsection{FAST FOURIER TRANSFORM}
 The Fast Fourier Transform (commonly abbreviated as
 FFT) is a fast algorithm for computing the discrete Fourier
@@ -202,37 +217,97 @@ where:
     \item $k$ is the index of the element in the input sequence $f[k]$.
 \end{itemize}
 
-% Linear
-\subsection{Linear Regression}
-Linear regression is a statistical technique used to model the relationship between a dependent variable, \textit{Y}, and one or more independent variables, \textit{X}. The goal is to find the best-fitting straight line (or hyperplane in higher dimensions) that describes the relationship between the variables. 
-When there are multiple independent variables, the linear regression is called multivariable linear regression, with equation has the form \cite{busin}:
- \[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
-Where:\\
-	\indent\textbullet\ Y is the dependent variable.\\
-	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent variables.\\
-	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
-	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
-	\indent\textbullet\ \(\varepsilon\) is the error term.
-
 \subsection{XGBoost}
-XGBoost is a highly efficient and scalable implementation of gradient boosting, a powerful machine learning technique. XGBoost operates by constructing a series of decision trees in an additive manner. Each tree is built sequentially, with each one correcting the errors of the previous trees. The model’s objective is to minimize the loss function. Key advantages of XGBoost include its ability to handle large datasets through parallelized computing, effective handling of missing data values, and flexible parameter tuning. These features, along with its state-of-the-art algorithm for supervised learning problems, known for its high accuracy, which rivals deep learning models\cite{Xgboost} .Unlike deep learning that typically requires numerical raw data, XGBoost can handle tabular datasets of any size and type, including categorical data often found in business models.  
+XGBoost is a highly efficient and scalable implementation of gradient boosting, a powerful machine learning technique. XGBoost operates by constructing a series of decision trees in an additive manner. Each tree is built sequentially, with each one correcting the errors of the previous trees. Key advantages of XGBoost include its ability to handle large datasets through parallelized computing, effective handling of missing data values, and regularization techniques to prevent overfitting\cite{Xgboost}.The model’s objective is to minimize the loss function. 
 
 Explanation of the mathematics behind XGBoost:\\
 \textbf{Ensemble Model:}XGBoost combines predictions from multiple decision trees $(f_k)$ to create a final prediction (F(x))\cite{Xgboost}:
 \begin{equation*}
-y_i = \phi(x_i) = \sum_{k=1}^K f_k(x_i), \quad f_k \in \mathcal{F},
+\hat{y}_i = \sum_{k=1}^n f_k(x_i), \quad f_k \in \mathcal{F},
 \end{equation*}
 
-Where: $F = {f(x) = w_q(x) \mid q : \mathbb{R}^m \to T, w \in \mathbb{R}^T}$\\
+
+where \(\mathcal{F}\) means the space of regression trees, \( f_k \) corresponds to a tree, so \( f_k(x_i) \) is the result of tree \( k \), and \( \hat{y}_i \) is the predicted value of the \( i \)th instance \( x_i \).
+
+\begin{figure}[H]
+    \centering
+\begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/xgboost.png}
+        \caption{A general architecture of XGBoost}
+        \label{fig:3}
+\end{minipage}
+\end{figure}
 
 \textbf{Objective Function:}
 It minimizes a loss function (L) that measures prediction error, with a regularization term ($\Omega$) to prevent overfitting:\cite{geekXGboost}
 
 \begin{equation*}
-\text{obj}(\theta) = \sum_{i=1}^n l(y_i, \hat{y}_i) + \sum_{k=1}^K \Omega(f_k)
+\text{obj}(\theta) = L(\theta) + \Omega(\theta)
 \end{equation*}
 
-Where, first term is the loss function and the second is the regularization parameter\\
+where \( L(\theta) = \sum_{i=1}^n l(y_i, \hat{y}_i) \) is the loss function, \(\hat{y}_i\) is the prediction and \( y_i \) is the target, and \( \Omega(\theta) = \sum_{k=1}^K \Omega(f_k) \) penalizes the complexity of the model.
+r\\
+\subsection{Recurrent neural network (RNN)}
+A recurrent neural network (RNN) is a type of artificial neural network which uses sequential data or time series data\cite{IBM}.  A recurrent neural network (RNN) is an extension of a conventional feedforward neural network, which is able to handle a variable-length sequence input. The RNN handles the variable-length sequence by having a recurrent hidden state whose activation at each time is dependent on that of the previous time\cite{Chung}.
+For each timestep \( t \), the activation \( a^{<t>} \) and the output \( y^{<t>} \) are expressed as follows:
+\[
+a^{<t>} = g_1\left( W_{aa} a^{<t-1>} + W_{ax} x^{<t>} + b_a \right)
+\]
+and
+\[
+y^{<t>} = g_2\left( W_{ya} a^{<t>} + b_y \right)
+\]
+where \( W_{ax}, W_{aa}, W_{ya}, b_a, b_y \) are coefficients that are shared temporally and \( g_1, g_2 \) are activation functions \cite{standford}.
+
+\begin{figure}[H]
+    \centering
+\begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bibliography/Figure/RNNmodel.png}
+        \caption{Architecture of a Traditional RNN}
+        \label{fig:3}
+\end{minipage}
+\end{figure}
+
+\subsection{Long short term memory (LSTM)}
+The Long Short-Term Memory (LSTM) model is a recurrent neural network designed to handle sequential data like time series. Unlike standard RNNs, LSTMs employ memory cells and gating mechanisms to selectively retain and discard information over long sequences. This allows LSTMs to effectively capture long-range dependencies within the sequential data.
+
+At the core of an LSTM are the memory cells regulated by gates - input gate (controls inflow), forget gate (controls clearing), and output gate (controls outflow). This gating architecture enables LSTMs to learn and leverage long-term patterns and relationships present in sequences. By addressing long-range temporal dependencies, LSTMs excel at sequence prediction tasks, making them well-suited for applications such as time series forecasting.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \scalebox{0.7}[0.7]{\includegraphics[width=\textwidth]{bibliography/Figure/LSTm.png}}
+        \caption{LSTM model}
+        \label{fig:3}
+    \end{minipage}
+\end{figure}
+Input gate ($i_t$):
+\[i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)\]
+    
+    Forget gate ($f_t$): 
+    \[f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)\] 
+    
+    Output gate ($o_t$): 
+    \[o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]
+    
+    Memory cell ($C_t$): 
+    \[\tilde{C}_t &= \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) 
+    C_t &= f_t \ast C_{t-1} + i_t \ast \tilde{C}_t\]
+    
+Hidden state ($h_t$): 
+\[h_t &= o_t \ast \tanh(C_t)\]
+
+\begin{itemize}
+\item $i_t, f_t, o_t$ are the values of the gates at time $t$.
+\item $W_i, W_f, W_o, W_C$ are weight matrices.
+\item $b_i, b_f, b_o, b_c$ are bias vectors.
+\item $h_{t-1}$ is the hidden state from the previous layer.
+\item $x_t$ is the input at time $t$.
+\item $C_t$ is the memory cell state at time $t$.
+\item $h_t$ is the hidden state at time $t$.
+\end{itemize}
 
 \subsection{GRU}
 The Gated Recurrent Unit, just like the LSTM, is a Recurrent
@@ -263,17 +338,47 @@ h_t = (z_t \ast c_t) + ((1 - z_t) \ast h_{t-1})
 \end{equation}
 \begin{figure}[H]
     \centering
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.4\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{bibliography/Figure/GRU_diagram.png}
+        \includegraphics[width=\textwidth]{bibliography/Figure/gru-ltr.png}
         \caption{GRU architecture}
         \label{fig:3}
 \end{minipage}
 \end{figure}
 
-\subsection{Fully Convolutional Neural Network(FCN)}
-Fully Convolutional Neural Networks (FCNs) were introduced by Wang et al. (2017b) for univariate time series classification, validated on 44 UCR/UEA datasets. FCNs use convolutional layers without local pooling, maintaining the time series length throughout. A key feature is replacing the final fully connected layer with a Global Average Pooling (GAP) layer, reducing parameters and enabling Class Activation Mapping (CAM) to identify crucial input segments. 
-FCNs lack pooling and regularization, benefiting from parameter invariance across varying time series lengths due to GAP, supporting transfer learning for model adaptation from one dataset to another.\cite{Ismail}
+\subsection{Fully Convolutional Network (FCN)}
+Each layer output in a convnet is a three-dimensional array
+of size $h \times w \times d$, where $h$ and $w$ are spatial dimensions, and
+$d$ is the feature or channel dimension. The first layer is the
+image, with pixel size $h \times w$, and $d$ channels. Locations in
+higher layers correspond to the locations in the image they
+are path-connected to, which are called their receptive fields.
+Convnets are inherently translation invariant. Their basic components (convolution, pooling, and activation functions) operate on local input regions, and depend only on
+relative spatial coordinates. Writing $x_{ij}$ for the data vector at
+location $(i, j)$ in a particular layer, and $y_{ij}$ for the following
+layer, these functions compute outputs $y_{ij}$ by:
+
+\[
+y_{ij} = f_{ks} \left( \{x_{si+\delta_i, sj+\delta_j}\}_{0 \le \delta_i, \delta_j < k} \right)
+\]
+
+where $k$ is called the kernel size, $s$ is the stride or subsampling factor, and $f_{ks}$ determines the layer type: a matrix
+multiplication for convolution or average pooling, a spatial
+max for max pooling, or an elementwise nonlinearity for an
+activation function, and so on for other types of layers.
+This functional form is maintained under composition,
+with kernel size and stride obeying the transformation rule:
+
+\[
+f_{ks} \circ g_{k's'} = (f \circ g)_{k' + (k-1)s', ss'}
+\]
+
+While a general net computes a general nonlinear function,
+a net with only layers of this form computes a nonlinear
+filter, which we call a deep filter or fully convolutional network.
+An FCN naturally operates on an input of any size, and
+produces an output of corresponding (possibly resampled)
+spatial dimensions.\cite{Ismail}
 
 \begin{figure}[H]
     \centering
@@ -284,65 +389,8 @@ FCNs lack pooling and regularization, benefiting from parameter invariance acros
         \label{fig:3}
 \end{minipage}
 \end{figure}
-\subsection{Recurrent neural network (RNN)}
-A recurrent neural network (RNN) is a type of artificial neural network which uses sequential data or time series data\cite{IBM}.  A recurrent neural network (RNN) is an extension of a conventional feedforward neural network, which is able to handle a variable-length sequence input. The RNN handles the variable-length sequence by having a recurrent hidden state whose activation at each time is dependent on that of the previous time\cite{Chung}.
-For each timestep \( t \), the activation \( a^{<t>} \) and the output \( y^{<t>} \) are expressed as follows:
-\[
-a^{<t>} = g_1\left( W_{aa} a^{<t-1>} + W_{ax} x^{<t>} + b_a \right)
-\]
-and
-\[
-y^{<t>} = g_2\left( W_{ya} a^{<t>} + b_y \right)
-\]
-where \( W_{ax}, W_{aa}, W_{ya}, b_a, b_y \) are coefficients that are shared temporally and \( g_1, g_2 \) are activation functions \cite{standford}.
 
-\begin{figure}[H]
-    \centering
-\begin{minipage}{0.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{bibliography/Figure/RNNmodel.png}
-        \caption{Architecture of a Traditional RNN}
-        \label{fig:3}
-\end{minipage}
-\end{figure}
-\subsection{Long short term memory (LSTM)}
-The Long Short-Term Memory (LSTM) model is a recurrent neural network designed to handle sequential data like time series. Unlike standard RNNs, LSTMs employ memory cells and gating mechanisms to selectively retain and discard information over long sequences. This allows LSTMs to effectively capture long-range dependencies within the sequential data.
 
-At the core of an LSTM are the memory cells regulated by gates - input gate (controls inflow), forget gate (controls clearing), and output gate (controls outflow). This gating architecture enables LSTMs to learn and leverage long-term patterns and relationships present in sequences. By addressing long-range temporal dependencies, LSTMs excel at sequence prediction tasks, making them well-suited for applications such as time series forecasting.
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.5\textwidth}
-        \centering
-        \scalebox{0.7}[0.7]{\includegraphics[width=\textwidth]{bibliography/Figure/LSTm.png}}
-        \caption{LSTM model}
-        \label{fig:3}
-    \end{minipage}
-\end{figure}
-Input gate ($i_t$):
-\[i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)\]
-
-Forget gate ($f_t$): 
-\[f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)\] 
-
-Output gate ($o_t$): 
-\[o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]
-
-Memory cell ($C_t$): 
-\[\tilde{C}_t &= \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) 
-C_t &= f_t \ast C_{t-1} + i_t \ast \tilde{C}_t\]
-
-Hidden state ($h_t$): 
-\[h_t &= o_t \ast \tanh(C_t)\]
-
-\begin{itemize}
-\item $i_t, f_t, o_t$ are the values of the gates at time $t$.
-\item $W_i, W_f, W_o, W_C$ are weight matrices.
-\item $b_i, b_f, b_o, b_c$ are bias vectors.
-\item $h_{t-1}$ is the hidden state from the previous layer.
-\item $x_t$ is the input at time $t$.
-\item $C_t$ is the memory cell state at time $t$.
-\item $h_t$ is the hidden state at time $t$.
-\end{itemize}
 
 \section{Result}
 \subsection{Evaluation Methods}
@@ -365,130 +413,107 @@ Where: \\
          \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
          \hline
          \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
-         \hline
-         \multirow{3}{*}{ARIMA} 
-         & 7:3  & 3932.5798 & 13.7514 & 3308.4751 \\ 
-         & 8:2 & 1542.0814 & 4.8217 & 1224.8404 \\ 
-         & \textcolor{red}{9:1} & \textcolor{red}{1238.2448} & \textcolor{red}{3.8899} & \textcolor{red}{997.3810} \\
-         \hline
-         \multirow{3}{*}{GRU} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{394.5391} & \textcolor{red}{1.007} & \textcolor{red}{244.3960} \\ 
-         & 8:2 & 476.5528 & 1.2615 & 297.4063 \\ 
-         & 9:1 & 765.6026 & 1.5120 & 411.5345 \\
-         \hline
-         \multirow{3}{*}{FCN} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{761.2610} & \textcolor{red}{0.0160} & \textcolor{red}{665.6353} \\ 
-         & 8:2 & 791.9841 & 0.0234 & 593.1706 \\ 
-         & 9:1 & 810.7567 & 0.0259 & 596.3067 \\
-         \hline
-         \multirow{3}{*}{RNN} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{448.0029} & \textcolor{red}{1.1568} & \textcolor{red}{281.8691} \\ 
-         & 8:2 & 470.8093 & 1.4700 & 293.8402 \\ 
-         & 9:1 & 810.3059 & 1.4771 & 512.4873 \\
-         \hline
-         \multirow{3}{*}{LSTM} 
-         & 7:3 & 531.4864 & 1.4123 & 363.7865 \\ 
-         & \textcolor{red}{8:2}  & \textcolor{red}{493.5754} & \textcolor{red}{1.2753} & \textcolor{red}{329.8735} \\ 
-         & 9:1 & 575.0604 & 1.6582 & 426.0182 \\
-         \hline
-         \multirow{3}{*}{FFT} 
-         & 7:3 & 12402.8913 & 50.2753 & 11653.0983 \\ 
-         & 8:2 & 4641.5937 & 18.8262 & 4368.4796 \\ 
-         & \textcolor{red}{9:1}  & \textcolor{red}{5794.8085} & \textcolor{red}{13.1265} & \textcolor{red}{4777.7704} \\
-         \hline
-         \multirow{3}{*}{XGBOOST} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{419.3048} & \textcolor{red}{1,2042} & \textcolor{red}{293.4514} \\ 
-         & 8:2 & 564.2950 & 1,6432 & 415.7110 \\ 
-         & 9:1 & 871.8973 & 2.2187 & 611.6353 \\
-         \hline
-         \multirow{3}{*}{LR} 
-         & 7:3 & 9134.5335 & 6.7563 & 1721.6769 \\ 
-         & 8:2 & 3512.4499 & 11.5962 & 3100.1106 \\ 
-         & \textcolor{red}{9:1}  & \textcolor{red}{1797.1567} & \textcolor{red}{5.5612} & \textcolor{red}{1449.3393} \\ 
-         \hline
+\hline
+\multirow{3}{*}{\centering ARIMA} & 7:3 & 3932.5798 & 13.7514 & 3308.4751 \\
+     & 8:2 & 1542.0814 & 4.8217 & 1224.8404 \\
+     & \textcolor{red}{9:1} & \textcolor{red}{1238.2448} & \textcolor{red}{3.8899} & \textcolor{red}{997.3804} \\
+\hline
+\multirow{3}{*}{\centering GRU}   & \textcolor{red}{7:3} & \textcolor{red}{380.5252} & \textcolor{red}{1.0507} & \textcolor{red}{244.9516} \\
+     & 8:2 & 412.8149 & 1.0227 & 252.8959 \\
+     & 9:1 & 545.3742 & 1.2304 & 332.2477 \\
+\hline
+\multirow{3}{*}{\centering FCN}   & \textcolor{red}{7:3} & \textcolor{red}{737.0995} & \textcolor{red}{2.6172} & \textcolor{red}{598.4848} \\
+     & 8:2 & 1111.2461 & 3.6139 & 911.2206 \\
+     & 9:1 & 827.6391 & 2.1990 & 588.7729 \\
+\hline
+\multirow{3}{*}{\centering RNN}   & 7:3 & 515.8307 & 1.6065 & 372.2723 \\
+     & \textcolor{red}{8:2} & \textcolor{red}{497.3003} & \textcolor{red}{1.3553} & \textcolor{red}{334.5276} \\
+     & 9:1 & 578.2733 & 1.4166 & 381.5157 \\
+\hline
+\multirow{3}{*}{\centering LSTM}  & 7:3 & 461.341 & 1.4958 & 341.2479 \\
+     & \textcolor{red}{8:2} & \textcolor{red}{495.0181} & \textcolor{red}{1.3254} & \textcolor{red}{331.5678} \\
+     & 9:1 & 580.2895 & 1.3335 & 359.7341 \\
+\hline
+\multirow{3}{*}{\centering FFT}   & 7:3 & 12366.0056 & 50.3046 & 11610.1708 \\
+     & 8:2 & 4629.2061 & 18.8982 & 4397.2235 \\
+     & \textcolor{red}{9:1} & \textcolor{red}{1909.2008} & \textcolor{red}{6.6089} & \textcolor{red}{1722.2856} \\
+\hline
+\multirow{3}{*}{\centering XGBOOST} & \textcolor{red}{7:3} & \textcolor{red}{402.127} & \textcolor{red}{1.2662} & \textcolor{red}{294.9247} \\
+       & 8:2 & 448.5182 & 1.3043 & 322.6302 \\
+       & 9:1 & 545.6544 & 1.4358 & 390.9168 \\
+\hline
+\multirow{3}{*}{\centering LR}    & 7:3 & 7607.3350 & 25.1283 & 7493.9168 \\
+     & 8:2 & 3512.4495 & 11.5926 & 3100.1016 \\
+     & \textcolor{red}{9:1} & \textcolor{red}{1797.1567} & \textcolor{red}{5.5612} & \textcolor{red}{1449.3335} \\
+\hline
     \end{tabular}
     \caption{ACB Dataset's Evaluation}
     \label{vcbdataset}
 \end{table}
-Based on the table, we conclude that the GRU model with a 7:3 proportion is the best choice for forecasting ACB's stock prices over the next 30 days, as it achieves the low values in RMSE, MAPE, MAE.
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-ACB.png}
-    \caption{ARIMA model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
 
+For the ACB stock price prediction, GRU and XGBOOST model (both with a 7:3 proportion) appear to be the most accurate and reliable based on the the low
+values in RMSE, MAPE, MAE. These models can potentially offer better insights and forecasting accuracy for investors dealing with ACB stocks in the Vietnamese market.
 \begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-ACB.png}
-    \caption{GRU model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-ACB.png}
+        \caption{ARIMA model’s result with 9:1 splitting proportion}
+        \label{fig:ARIMA}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/GRU-ACB.png}
+        \caption{GRU model’s result with 7:3 splitting proportion}
+        \label{fig:GRU}
+    \end{minipage}
 \end{figure}
-
 \begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-ACB.png}
-    \caption{FCN model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FCN-ACB.png}
+        \caption{FCN model’s result with 7:3 splitting proportion}
+        \label{fig:FCN}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/RNN-ACB.png}
+        \caption{RNN model’s result with 8:2 splitting proportion}
+        \label{fig:RNN}
+    \end{minipage}
+    
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-ACB.png}
+        \caption{LSTM model’s result with 8:2 splitting proportion}
+        \label{fig:LSTM}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FFT-ACB.png}
+        \caption{FFT model’s result with 9:1 splitting proportion}
+        \label{fig:FFT}
+    \end{minipage}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-ACB.png}
-    \caption{RNN model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-ACB.png}
-    \caption{LSTM model’s result with 8:2 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-ACB.png}
-    \caption{FFT model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-ACB.png}
-    \caption{XGBoost model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/LR-ACB.png}
-    \caption{Linear Regression model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-ACB.png}
+        \caption{XGBoost model’s result with 7:3 splitting proportion}
+        \label{fig:XGBoost}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LR-ACB.png}
+        \caption{Linear Regression model’s result with 9:1 splitting proportion}
+        \label{fig:LR}
+    \end{minipage}
 \end{figure}
 
 \subsection{BID dataset} 
@@ -502,41 +527,41 @@ Based on the table, we conclude that the GRU model with a 7:3 proportion is the 
          \hline
          \multirow{3}{*}{ARIMA} 
          & 7:3 & 9563.7477 & 19.8847 & 8620.5906 \\ 
-         & \textcolor{red}{8:2}  & \textcolor{red}{6464.7779} & \textcolor{red}{10.0109} & \textcolor{red}{4764.1887} \\ 
+         & \textcolor{red}{8:2} & \textcolor{red}{6464.7779} & \textcolor{red}{10.0109} & \textcolor{red}{4764.1887} \\ 
          & 9:1 & 6158.2991 & 10.6520 & 5292.1888 \\
          \hline
          \multirow{3}{*}{GRU} 
-         & 7:3 & 811.9859 & 1.3382 & 586.6200 \\ 
-         & \textcolor{red}{8:2}  & \textcolor{red}{804.1871} & \textcolor{red}{1.2751} & \textcolor{red}{584.2526} \\
-         & 9:1 & 1047.6395 & 1.4999 & 744.9879 \\
+         & \textcolor{red}{7:3} & \textcolor{red}{749.0815} & \textcolor{red}{1.2404} & \textcolor{red}{525.8805} \\ 
+         & 8:2 & 782.4308 & 1.2474 & 552.8802 \\
+         & 9:1 & 964.3091 & 1.3533 & 677.6551 \\
          \hline
          \multirow{3}{*}{FCN} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{1636.2305} & \textcolor{red}{0.0317} & \textcolor{red}{1336.0777} \\ 
-         & 8:2 & 2481.7959 & 0.0432 & 2005.2779 \\ 
-         & 9:1 & 2552.3799 & 0.0446 & 2247.3583 \\
+         & 7:3 & 2259.3188 & 4.6895 & 1954.8440 \\ 
+         & \textcolor{red}{8:2} & \textcolor{red}{1192.5075} & \textcolor{red}{1.9916} & \textcolor{red}{895.5052} \\ 
+         & 9:1 & 1356.9802 & 2.0289 & 1015.2221 \\
          \hline
          \multirow{3}{*}{RNN} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{730.3118} & \textcolor{red}{1.2270} & \textcolor{red}{533.1443} \\ 
-         & 8:2 & 831.5655 & 1.3253 & 603.7621 \\ 
-         & 9:1 & 920.7904 & 1.2527 & 617.9939 \\
+         & \textcolor{red}{7:3} & \textcolor{red}{1001.5601} & \textcolor{red}{1.8226} & \textcolor{red}{771.9509} \\ 
+         & 8:2 & 1103.2342 & 2.0474 & 891.3108 \\ 
+         & 9:1 & 1074.0008 & 1.6376 & 805.7158 \\
          \hline
          \multirow{3}{*}{LSTM} 
-         & 7:3 & 531.4864 & 1.4123 & 339.2725 \\ 
-         & \textcolor{red}{8:2}  & \textcolor{red}{493.5754} & \textcolor{red}{1.2753} & \textcolor{red}{329.8735} \\ 
-         & 9:1 & 577.0604 & 1.6582 & 426.0182 \\
+         & \textcolor{red}{7:3} & \textcolor{red}{820.0516} & \textcolor{red}{1.3974} & \textcolor{red}{593.1434} \\ 
+         & 8:2 & 847.0286 & 1.3657 & 606.8658 \\ 
+         & 9:1 & 1024.1498 & 1.4659 & 733.4891 \\
          \hline
          \multirow{3}{*}{FFT} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{4894.1684} & \textcolor{red}{11.6059} & \textcolor{red}{5783.9707} \\
-         & 8:2 & 6459.4307 & 12.6873 & 5674.0699 \\ 
-         & 9:1 & 8002.1502 & 12.4200 & 6248.1023 \\
+         & \textcolor{red}{7:3} & \textcolor{red}{5736.0835} & \textcolor{red}{11.4603} & \textcolor{red}{4838.2472} \\
+         & 8:2 & 5971.8017 & 11.4028 & 5100.2349 \\ 
+         & 9:1 & 7792.9476 & 11.9885 & 6037.3514 \\
          \hline
          \multirow{3}{*}{XGBOOST} 
-         & \textcolor{red}{7:3}  & \textcolor{red}{3932.2959} & \textcolor{red}{7.0085} & \textcolor{red}{3206.8939} \\ 
-         & 8:2 & 5022.5343 & 8.7570 & 4248.0894 \\ 
-         & 9:1 & 5515.6624 & 10.9510 & 5428.8339 \\
+         & \textcolor{red}{7:3} & \textcolor{red}{3225.2175} & \textcolor{red}{4.2320} & \textcolor{red}{2005.3957} \\ 
+         & 8:2 & 4007.5167 & 5.4957 & 2702.9580 \\ 
+         & 9:1 & 6153.4990 & 10.9518 & 5571.4794 \\
          \hline
          \multirow{3}{*}{LR} 
-         & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{4496.2716} \\
+         & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{1845.6229} \\
          & 8:2 & 6678.0104 & 12.9205 & 5097.8035 \\ 
          & 9:1 & 8699.7701 & 19.1198 & 7686.7608 \\
          \hline
@@ -545,214 +570,77 @@ Based on the table, we conclude that the GRU model with a 7:3 proportion is the 
     \label{vcbdataset}
 \end{table}
 
-Based on the evaluation table, the LSTM model with an 8:2 training/testing ratio provides the best prediction results for BID stock prices, with the lowest RMSE (493.5754), MAPE (1.2753), and MAE (329.8735). GRU is also a strong choice with similar performance at the same ratio. Overall, LSTM stands out as the top choice for predicting BID stock prices.
+
+
+Based on the evaluation table, the GRU model with an 7:3 training/testing ratio provides the best prediction results for BID stock prices, with the lowest RMSE (749.0815), MAPE (1.2404\%), and MAE (525.8805). LSTM is also a strong choice with similar performance at the same ratio. Overall, GRU stands out as the top choice for predicting BID stock prices
 
 \begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-BID.png}
-    \caption{ARIMA model’s result with 8:2 splitting proportion}
-    \label{fig8}
-  \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-BID.png}
+        \caption{ARIMA model’s result with 8:2 splitting proportion}
+        \label{fig:ARIMA-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/GRU-BID.png}
+        \caption{GRU model’s result with 7:3 splitting proportion}
+        \label{fig:GRU-BID}
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-BIDV.png}
-    \caption{GRU model’s result with 8:2 splitting proportion}
-    \label{fig8}
-  \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FCN-BID.png}
+        \caption{FCN model’s result with 8:3 splitting proportion}
+        \label{fig:FCN-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/RNN-BID.png}
+        \caption{RNN model’s result with 7:3 splitting proportion}
+        \label{fig:RNN-BID}
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-BID.png}
-    \caption{FCN model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-BID.png}
+        \caption{LSTM model’s result with 7:3 splitting proportion}
+        \label{fig:LSTM-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FFT-BID.png}
+        \caption{FFT model’s result with 7:3 splitting proportion}
+        \label{fig:FFT-BID}
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-BID.png}
-    \caption{RNN model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-BID.png}
+        \caption{XGBoost model’s result with 7:3 splitting proportion}
+        \label{fig:XGBoost-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LR-BID.png}
+        \caption{Linear Regression model’s result with 7:3 splitting proportion}
+        \label{fig:LR-BID}
+    \end{minipage}
 \end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-BID.png}
-    \caption{LSTM model’s result with 8:2 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-BID.png}
-    \caption{FFT model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-BID.png}
-    \caption{XGBoost model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/LR-BID.png}
-    \caption{Linear Regression model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-
-
-
-\subsection{VCB dataset} 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}} \\ \hline
-    \centering Model & Proportion & RMSE & MAPE (\%) & MAE \\ \hline
-        \multirow{3}{*}{ARIMA} & 7:3 & 39861.8637 & 41.9820 & 36312.4125 \\
-        & 8:2 & 16889.0992 & 15.3808 & 13728.8500 \\
-        & \textcolor{red}{9:1} & \textcolor{red}{3827.0147} & \textcolor{red}{3.5494} & \textcolor{red}{3130.8613} \\ \hline
-        \multirow{3}{*}{GRU} & 7:3 & 1224.6726 & 1.0457 & 912.9100 \\
-        & 8:2 & 1314.5240 & 1.1061 & 989.5174 \\
-        & \textcolor{red}{9:1} & \textcolor{red}{829.2120} & \textcolor{red}{0.7164} & \textcolor{red}{656.1504} \\ \hline
-        \multirow{3}{*}{FCN} & \textcolor{red}{7:3} & \textcolor{red}{2192.3873} & \textcolor{red}{0.0202} & \textcolor{red}{1712.1799} \\
-        & 8:2 & 3943.3529 & 0.039 & 3509.7156 \\
-        & 9:1 & 2773.4293 & 0.0234 & 2163.6424 \\ \hline
-        \multirow{3}{*}{RNN} & 7:3 & 1697.2557 & 1.5721 & 1348.6940 \\
-        & 8:2 & 1537.9391 & 1.3413 & 1185.1081 \\
-        & \textcolor{red}{9:1} & \textcolor{red}{872.8985} & \textcolor{red}{0.7490} & \textcolor{red}{682.9690} \\ \hline
-        \multirow{3}{*}{LSTM} & 7:3 & 1902.6655 & 1.8272 & 1648.573 \\
-        & 8:2 & 2788.466 & 2.8693 & 2580.269 \\
-        & \textcolor{red}{9:1} & \textcolor{red}{1135.6407} & \textcolor{red}{0.9596} & \textcolor{red}{851.0078} \\ \hline
-        \multirow{3}{*}{FFT} & \textcolor{red}{7:3} & \textcolor{red}{5304.4333} & \textcolor{red}{4.7513} & \textcolor{red}{4075.0324} \\
-        & 8:2 & 10602.9959 & 10.4838 & 9349.2730 \\
-        & 9:1 & 10551.3341 & 9.4645 & 8695.5248 \\ \hline
-        \multirow{3}{*}{XGBOOST} & 7:3 & 3682.6546 & 3.308 & 2924.0263 \\
-        & 8:2 & 4647.9822 & 4.4902 & 3.990 \\
-        & \textcolor{red}{9:1} & \textcolor{red}{1698.2616} & \textcolor{red}{1.5916} & \textcolor{red}{1462.3939} \\ \hline
-        \multirow{3}{*}{LR} & 7:3 & 6987.9849 & 7.1427 & 5818.5129 \\
-        & 8:2 & 9168.4296 & 10.5427 & 8439.4780 \\
-        & \textcolor{red}{9:1} & \textcolor{red}{6673.7497} & \textcolor{red}{6.9101} & \textcolor{red}{5853.9128} \\ \hline
-        \end{tabular}
-    \caption{VCB Dataset's Evaluation}
-    \label{tab:dataset_evaluation}
-\end{table}
-
-Based on the table, we conclude that the GRU model with
-a 7:3 proportion is the best choice for forecasting VCB’s
-stock prices over the next 30 days, as it achieves the low
-values in RMSE(829.2120), MAPE(0.7164), MAE(656.1504)
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-VCB.png}
-    \caption{ARIMA model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/GRU-VCB.png}
-    \caption{GRU model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/FCN-VCB.png}
-    \caption{FCN model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/RNN-VCB-9-1.png}
-    \caption{RNN model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-VCB.png}
-    \caption{LSTM model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/FFT-VCB.png}
-    \caption{FFT model’s result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-VCB.png}
-    \caption{XGBoost model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.6\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/diagram/LR-VCB.png}
-    \caption{LR model’s result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 
 
 \section{Conclusion}
@@ -764,6 +652,14 @@ LSTM, with a train-test ratio of 8:2, gives the best prediction results for BID 
 \section{ORIENTATION}
 The report can be expanded and improved by enhancing evaluation methods such as  perform sensitivity analysis to better understand the influence of each input factor on the forecasting results. Secondly, develop Real-Time Forecasting Systems like create a real-time forecasting system to continuously provide investment recommendations to investors. These development directions will help improve the accuracy and applicability of forecasting models, better supporting investors in making informed decisions.
 
+\section{Acknowledgment}
+\addcontentsline{toc}{section}{Acknowledgment}
+First and foremost, we would like to express our heartfelt gratitude to Associate Professors. \textbf{Prof. Dr. Nguyen Dinh Thuan} have given profound knowledge, critical insights, and attention to detail throughout the research
+ process. In addition, \textbf{Mr. Nguyen Minh Nhut} directly provided dedicated instruction, and offered many valuable suggestions that helped our team in shaping the direction and quality of this report.
+
+This report would not have been possible without the
+ support and contributions of our mentors. Thank you all for your invaluable assistance and
+ encouragement. We hope to that we will continue to receive support and encouragement from Associate Professors in the future
 \begin{thebibliography}{00}
 \bibitem{cakra2015stock}
 Cakra, Y. E., \& Trisedya, B. D. (2015, October). Stock price prediction using linear regression based on sentiment analysis. In 2015 international conference on advanced computer science and information systems (ICACSIS) (pp. 147-154). IEEE.
@@ -820,7 +716,7 @@ P. Pawangfg, "XGBoost," GeeksforGeeks, Available: https://www.geeksforgeeks.org/
 Yamak, P. T., Yujian, L., \& Gadosey, P. K. (2019, December). A comparison between arima, lstm, and gru for time series forecasting. In Proceedings of the 2019 2nd international conference on algorithms, computing and artificial intelligence (pp. 49-55).
 %FCN
 \bibitem{Ismail}
-Ismail Fawaz, H., Forestier, G., Weber, J., Idoumghar, L., \& Muller, P. A. (2019). Deep learning for time series classification: a review. Data mining and knowledge discovery, 33(4), 917-963.
+Long, J., Shelhamer, E., \& Darrell, T. (2015). Fully convolutional networks for semantic segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 3431-3440).
 % RNN
 \bibitem{IBM}
 IBM Technology company, “What are recurrent neural networks?”, Available at: \url{https://www.ibm.com/topics/recurrent-neural-networks}
