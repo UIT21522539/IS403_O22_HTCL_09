@@ -1,3 +1,5 @@
+## Group 09 Members and Roles
+
 | Name                     | Student ID | Role                           |Model                        |
 |--------------------------|------------|--------------------------------|--------------------------------|
 | Trần Trúc Quỳnh          | 21522539   | Leader                |FCN, ARIMA, GRU                |
