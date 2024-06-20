@@ -38,17 +38,18 @@ The volatility of stock prices presents challenges for investors navigating the 
 \end{abstract}
 
 \begin{keywords}
-Time Series Analysis, Machine Learning, Financial Forecasting, Vietnamese Stock Market, GRU, RNN, ARIMA, LSTM, FFT, XGBoost, FCN, Linear Regression.
+Model Performance Evaluation, Optimal Forecasting Model Selection, Financial Forecasting, Vietnamese Stock Market, GRU, RNN, ARIMA, LSTM, FFT, XGBoost, FCN, Linear Regression.
 \end{keywords}
 
 \titlepgskip=-15pt
 
 \maketitle
 \section{Introduction}% \label{sec:introduction}
-The Vietnamese stock market has witnessed a record-high level of participation in recent years, reflecting the growing attention and interest it has garnered. This trend is a positive indicator of the market's potential and the overall recovery of the economy in the post-2023 period. However, the stock market also inherently carries short-term risks that investors must navigate. Among the various sectors, the banking industry has traditionally occupied a high proportion and serves as a crucial pillar of the economy.
-The purpose of this paper is to support investors in making accurate decisions regarding three bank stocks (ACB, BID, VCB) listed on the Hochiminh Stock Exchange (HOSE).
+The Vietnamese stock market has experienced significant growth and increased investor participation in recent years, highlighting its potential and the overall economic recovery post-2023. However, the inherent volatility of stock prices presents challenges for investors, particularly in the banking sector, which is a crucial pillar of the economy. This study aims to assist investors by evaluating the effectiveness of various forecasting models in predicting stock price trends for three major banks—Asia Commercial Bank (ACB), Bank for Investment and Development of Vietnam (BIDV), and Joint Stock Commercial Bank for Foreign Trade of Vietnam (VCB)—listed on the Hochiminh Stock Exchange (HOSE).
 
-To achieve this goal, the study will apply various models, including Linear Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), ecurrent neural network (RNN), Gated Recurrent Units (GRU),Long short term memory (LSTM), Fast Fourier Transform (FFT),XGBOOST, Fully Convolutional Networks (FCNs) to the stock price data from 2019 to 2024 to forecast the trends.Techniques such as RMSE, MAPE, and MSLE will be utilized to evaluate the effectiveness of these models.
+To achieve this, we applied a range of statistical, machine learning, and deep learning models, including Linear Regression, ARIMA, RNN, GRU, LSTM, FFT, XGBoost, and FCN, to historical stock price data from 2019 to 2024. Our methodology involved a comprehensive assessment using metrics like RMSE, MAPE, and MAE to determine the accuracy and reliability of each model. Additionally, we explored the effects of varying training/test ratio configurations on the performance of these models, offering valuable insights into effective data partitioning strategies.
+
+The core contribution of this research lies in its detailed comparison of these forecasting models, providing investors with crucial information for making informed stock selection decisions. By pinpointing the most effective model for each bank stock, we aim to support investors in navigating the complex and fluctuating Vietnamese stock market with greater confidence and precision.
 \section{Related Works}
 Over the past several years, a significant volume of research has concentrated on forecasting stock prices by leveraging various machine learning and statistical techniques. Maqsood et al. have used linear regression and 2 models for stock exchange forecasting \cite{cakra2015stock}. Meanwhile, URAS combined linear regression and neural network models to forecast Bitcoin closing prices, showing that linear regression had faster execution speed and could accurately predict Bitcoin price fluctuations \cite{uras2020forecasting}.
 
@@ -58,11 +59,11 @@ Yongqiong Zhu \cite{ZhuRNN} applied an RNN model to predict the stock prices of 
 
 Shejul et al. \cite{ShejulGRU} compared the performance of the Gated Recurrent Unit (GRU) and Bidirectional Long Short-Term Memory (BiLSTM) models in predicting stock prices. Experimental results indicate that both models accurately forecast future stock prices, with the BiLSTM model outperforming the GRU model. Despite this, the GRU model demonstrates nearly double the speed of the BiLSTM model due to its simpler architecture. Overall, both models offer precise predictions and can effectively anticipate future stock market trends.
 
-C. Fjellström (2022) \cite{fjellstrom2022lstm} explored an LSTM ensemble for stock price prediction in the paper "Long Short-Term Memory Neural Network for Financial Time Series." The work demonstrates superior performance over traditional portfolios, offering insights into LSTM's potential for financial forecasting and strategies for enhancing model accuracy and reducing market risk. S. Mehtab, J. Sen (2020) \cite{mehtab2020stock} proposed a deep learning approach for stock price prediction by employing Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) networks. Their work contributes to the field by exploring the effectiveness of this combined deep learning architecture in forecasting the NIFTY 50 index prices. They further emphasize the importance of data pre-processing and model evaluation, providing a methodological blueprint for financial market analysis using deep learning techniques.
+C. Fjellström (2022) \cite{fjellstrom2022lstm} demonstrates the effectiveness of LSTMs in capturing the complexities of financial time series data in the paper "Long Short-Term Memory Neural Network for Financial Time Series." With details the data preprocessing steps, network architecture, and training/testing processes comprehensively, making it replicable for future researchers. However the paper lack of comparison with other advanced machine learning models
 
 Chen et al.\cite{ChenFFT} used an Fast Fourier Transform algorithm to deal with historical training data for forecasting stock prices, achieving a more highly accurate. Experimental analysis is performed on datasets covering a seven-year period of both the Taiwan Stock Exchange Capitalization Weighted Stock Index (TAIEX) and the Dow-Jones Industrial Average (DJIA). 
 
-A. Qingwen Jin et al. \cite{jin2019using} established predictive models using the Best Track TC dataset and the XGBOOST algorithm to anticipate Tropical Cyclone (TC) intensity in the Western North Pacific (WNP). Across six scenarios, the model achieved high accuracy with MAE < 4.50 m/s, CC > 0.89, and NRMSE < 10.00\%. The XGBOOST model exhibited superior performance compared to traditional Back-Propagation Neural Network (BPNN) models for the same predictors and independent prediction samples. A. O. A. A. A. Tianqi Chen and Carlos Guestrin (2016)\cite{chen2016xgboost} introduced XGBoost, a scalable tree boosting system. The paper describes the architecture of XGBoost and its core algorithms, presenting improvements to enhance performance and accuracy across a variety of machine learning tasks.
+Tianqi Chen and Carlos Guestrin (2016)\cite{chen2016xgboost} introduced XGBoost, a scalable tree boosting system. The primary contribution of this paper is the development of a highly scalable and efficient tree boosting system. XGBoost can handle billions of examples and is optimized for both single-machine and distributed computing environments
 
 Fully Convolutional Networks (FCNs) have been studied and applied in various fields related to image data processing and semantic segmentation. According to Shima Nabiee's research on stock trend prediction, FCNs have also been proven to be a powerful and flexible tool, enabling the analysis and prediction of stock price trends based on raw data \cite{nabiee2023stock}.
 \section{Materials}
@@ -131,6 +132,10 @@ The analysis will focus on the historical stock prices of three banks in Vietnam
         \caption{BID stock price's time}
         \label{fig:2}
     \end{minipage}
+
+    \end{figure}
+    \begin{figure}[H]
+    \centering
     \begin{minipage}{0.23\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{bibliography/Figure/BIDhist.png}
@@ -271,33 +276,25 @@ where \( W_{ax}, W_{aa}, W_{ya}, b_a, b_y \) are coefficients that are shared te
 \end{figure}
 
 \subsection{Long short term memory (LSTM)}
-The Long Short-Term Memory (LSTM) model is a recurrent neural network designed to handle sequential data like time series. Unlike standard RNNs, LSTMs employ memory cells and gating mechanisms to selectively retain and discard information over long sequences. This allows LSTMs to effectively capture long-range dependencies within the sequential data.
+The Long Short-Term Memory (LSTM) model is a recurrent neural network designed to handle sequential data like time series. Unlike standard RNNs, LSTMs employ memory cells and gating mechanisms to selectively retain and discard information over long sequences. This allows LSTMs to effectively capture long-range dependencies within the sequential data\cite{LSTM1}.
 
-At the core of an LSTM are the memory cells regulated by gates - input gate (controls inflow), forget gate (controls clearing), and output gate (controls outflow). This gating architecture enables LSTMs to learn and leverage long-term patterns and relationships present in sequences. By addressing long-range temporal dependencies, LSTMs excel at sequence prediction tasks, making them well-suited for applications such as time series forecasting.
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.5\textwidth}
-        \centering
-        \scalebox{0.7}[0.7]{\includegraphics[width=\textwidth]{bibliography/Figure/LSTm.png}}
-        \caption{LSTM model}
-        \label{fig:3}
-    \end{minipage}
-\end{figure}
-Input gate ($i_t$):
-\[i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)\]
-    
-    Forget gate ($f_t$): 
-    \[f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)\] 
-    
-    Output gate ($o_t$): 
-    \[o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]
-    
-    Memory cell ($C_t$): 
-    \[\tilde{C}_t &= \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) 
-    C_t &= f_t \ast C_{t-1} + i_t \ast \tilde{C}_t\]
-    
+At the core of an LSTM are the memory cells regulated by gates - input gate (controls inflow), forget gate (controls clearing), and output gate (controls outflow). This gating architecture enables LSTMs to learn and leverage long-term patterns and relationships present in sequences. By addressing long-range temporal dependencies, LSTMs excel at sequence prediction tasks, making them well-suited for applications such as time series forecasting\cite{LSTM2}.
+
+Forget gate ($f_t$): 
+\[f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)\] 
+
+Output gate ($o_t$): 
+\[o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]
+
+Candidate Memory Cell ($\tilde{C}_t$): 
+\[\tilde{C}_t = \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) \]
+
+Memory cell ($C_t$): 
+\[C_t = f_t \ast C_{t-1} + i_t \ast \tilde{C}_t\]
+
 Hidden state ($h_t$): 
-\[h_t &= o_t \ast \tanh(C_t)\]
+\[h_t = o_t \ast \tanh(C_t)\]
+
 
 \begin{itemize}
 \item $i_t, f_t, o_t$ are the values of the gates at time $t$.
@@ -308,7 +305,15 @@ Hidden state ($h_t$):
 \item $C_t$ is the memory cell state at time $t$.
 \item $h_t$ is the hidden state at time $t$.
 \end{itemize}
-
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \scalebox{0.7}[0.7]{\includegraphics[width=\textwidth]{bibliography/Figure/LSTM.png}}
+        \caption{Structure of the LSTM cell }
+        \label{fig:3}
+    \end{minipage}
+\end{figure}
 \subsection{GRU}
 The Gated Recurrent Unit, just like the LSTM, is a Recurrent
 Neural Network. It, however, has a less complicated structure
@@ -347,7 +352,38 @@ h_t = (z_t \ast c_t) + ((1 - z_t) \ast h_{t-1})
 \end{figure}
 
 \subsection{Fully Convolutional Network (FCN)}
+Each layer output in a convnet is a three-dimensional array
+of size $h \times w \times d$, where $h$ and $w$ are spatial dimensions, and
+$d$ is the feature or channel dimension. The first layer is the
+image, with pixel size $h \times w$, and $d$ channels. Locations in
+higher layers correspond to the locations in the image they
+are path-connected to, which are called their receptive fields.
+Convnets are inherently translation invariant. Their basic components (convolution, pooling, and activation functions) operate on local input regions, and depend only on
+relative spatial coordinates. Writing $x_{ij}$ for the data vector at
+location $(i, j)$ in a particular layer, and $y_{ij}$ for the following
+layer, these functions compute outputs $y_{ij}$ by:
 
+\[
+y_{ij} = f_{ks} \left( \{x_{si+\delta_i, sj+\delta_j}\}_{0 \le \delta_i, \delta_j < k} \right)
+\]
+
+where $k$ is called the kernel size, $s$ is the stride or subsampling factor, and $f_{ks}$ determines the layer type: a matrix
+multiplication for convolution or average pooling, a spatial
+max for max pooling, or an elementwise nonlinearity for an
+activation function, and so on for other types of layers.
+This functional form is maintained under composition,
+with kernel size and stride obeying the transformation rule:
+
+\[
+f_{ks} \circ g_{k's'} = (f \circ g)_{k' + (k-1)s', ss'}
+\]
+
+While a general net computes a general nonlinear function,
+a net with only layers of this form computes a nonlinear
+filter, which we call a deep filter or fully convolutional network.
+An FCN naturally operates on an input of any size, and
+produces an output of corresponding (possibly resampled)
+spatial dimensions.\cite{Ismail}
 
 \begin{figure}[H]
     \centering
@@ -364,11 +400,11 @@ h_t = (z_t \ast c_t) + ((1 - z_t) \ast h_{t-1})
 \section{Result}
 \subsection{Evaluation Methods}
 \textbf{Mean Percentage Absolute Error} (MAPE): is the average percentage error in a set of predicted values.\\
-\[MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} |  = 1 \]\\
+\[MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} |  = 1 \cite{Eval}\]\\
 \textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.\\
-\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]\\
+\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\cite{Eval}\]\\
 \textbf{Mean Absolute Error} (MAE): is the average absolute differences between the expected and actual values.\\
-\[MAE= \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{g}_i| \]\\
+\[MAE= \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{g}_i|\cite{Eval} \]\\
 Where: \\
 	\indent\textbullet\ \(n\) is the number of observations in the dataset.\\
 	\indent\textbullet\ \(y_i\)  is the true value.\\
@@ -453,7 +489,8 @@ values in RMSE, MAPE, MAE. These models can potentially offer better insights an
         \caption{RNN model’s result with 8:2 splitting proportion}
         \label{fig:RNN}
     \end{minipage}
-    
+\end{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.45\linewidth}
         \centering
@@ -468,7 +505,8 @@ values in RMSE, MAPE, MAE. These models can potentially offer better insights an
         \caption{FFT model’s result with 9:1 splitting proportion}
         \label{fig:FFT}
     \end{minipage}
-
+\end{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.45\linewidth}
         \centering
@@ -485,16 +523,273 @@ values in RMSE, MAPE, MAE. These models can potentially offer better insights an
     \end{minipage}
 \end{figure}
 
+\subsection{BID dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+         \multirow{3}{*}{ARIMA} 
+         & 7:3 & 9563.7477 & 19.8847 & 8620.5906 \\ 
+         & \textcolor{red}{8:2} & \textcolor{red}{6464.7779} & \textcolor{red}{10.0109} & \textcolor{red}{4764.1887} \\ 
+         & 9:1 & 6158.2991 & 10.6520 & 5292.1888 \\
+         \hline
+         \multirow{3}{*}{GRU} 
+         & \textcolor{red}{7:3} & \textcolor{red}{749.0815} & \textcolor{red}{1.2404} & \textcolor{red}{525.8805} \\ 
+         & 8:2 & 782.4308 & 1.2474 & 552.8802 \\
+         & 9:1 & 964.3091 & 1.3533 & 677.6551 \\
+         \hline
+         \multirow{3}{*}{FCN} 
+         & 7:3 & 2259.3188 & 4.6895 & 1954.8440 \\ 
+         & \textcolor{red}{8:2} & \textcolor{red}{1192.5075} & \textcolor{red}{1.9916} & \textcolor{red}{895.5052} \\ 
+         & 9:1 & 1356.9802 & 2.0289 & 1015.2221 \\
+         \hline
+         \multirow{3}{*}{RNN} 
+         & \textcolor{red}{7:3} & \textcolor{red}{1001.5601} & \textcolor{red}{1.8226} & \textcolor{red}{771.9509} \\ 
+         & 8:2 & 1103.2342 & 2.0474 & 891.3108 \\ 
+         & 9:1 & 1074.0008 & 1.6376 & 805.7158 \\
+         \hline
+         \multirow{3}{*}{LSTM} 
+         & \textcolor{red}{7:3} & \textcolor{red}{820.0516} & \textcolor{red}{1.3974} & \textcolor{red}{593.1434} \\ 
+         & 8:2 & 847.0286 & 1.3657 & 606.8658 \\ 
+         & 9:1 & 1024.1498 & 1.4659 & 733.4891 \\
+         \hline
+         \multirow{3}{*}{FFT} 
+         & \textcolor{red}{7:3} & \textcolor{red}{5736.0835} & \textcolor{red}{11.4603} & \textcolor{red}{4838.2472} \\
+         & 8:2 & 5971.8017 & 11.4028 & 5100.2349 \\ 
+         & 9:1 & 7792.9476 & 11.9885 & 6037.3514 \\
+         \hline
+         \multirow{3}{*}{XGBOOST} 
+         & \textcolor{red}{7:3} & \textcolor{red}{3225.2175} & \textcolor{red}{4.2320} & \textcolor{red}{2005.3957} \\ 
+         & 8:2 & 4007.5167 & 5.4957 & 2702.9580 \\ 
+         & 9:1 & 6153.4990 & 10.9518 & 5571.4794 \\
+         \hline
+         \multirow{3}{*}{LR} 
+         & \textcolor{red}{7:3} & \textcolor{red}{5967.7684} & \textcolor{red}{11.6453} & \textcolor{red}{1845.6229} \\
+         & 8:2 & 6678.0104 & 12.9205 & 5097.8035 \\ 
+         & 9:1 & 8699.7701 & 19.1198 & 7686.7608 \\
+         \hline
+    \end{tabular}
+    \caption{BID Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+
+
+
+Based on the evaluation table, the GRU model with an 7:3 training/testing ratio provides the best prediction results for BID stock prices, with the lowest RMSE (749.0815), MAPE (1.2404\%), and MAE (525.8805). LSTM is also a strong choice with similar performance at the same ratio. Overall, GRU stands out as the top choice for predicting BID stock prices
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-BID.png}
+        \caption{ARIMA model’s result with 8:2 splitting proportion}
+        \label{fig:ARIMA-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/GRU-BID.png}
+        \caption{GRU model’s result with 7:3 splitting proportion}
+        \label{fig:GRU-BID}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FCN-BID.png}
+        \caption{FCN model’s result with 8:3 splitting proportion}
+        \label{fig:FCN-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/RNN-BID.png}
+        \caption{RNN model’s result with 7:3 splitting proportion}
+        \label{fig:RNN-BID}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-BID.png}
+        \caption{LSTM model’s result with 7:3 splitting proportion}
+        \label{fig:LSTM-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FFT-BID.png}
+        \caption{FFT model’s result with 7:3 splitting proportion}
+        \label{fig:FFT-BID}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-BID.png}
+        \caption{XGBoost model’s result with 7:3 splitting proportion}
+        \label{fig:XGBoost-BID}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LR-BID.png}
+        \caption{Linear Regression model’s result with 7:3 splitting proportion}
+        \label{fig:LR-BID}
+    \end{minipage}
+\end{figure}
+
+
+
+
+\subsection{VCB dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Proportion & RMSE & MAPE (\%) & MAE\\
+         \hline
+        \multirow{3}{*}{ARIMA} 
+        & 7:3 & 39861.8637 & 41.9820 & 36312.4125 \\
+        & 8:2 & 16889.0992 & 15.3808 & 13728.8500 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{1238.2448} & \textcolor{red}{3.8899} & \textcolor{red}{997.3810} \\
+        \hline
+        \multirow{3}{*}{GRU} 
+        & 7:3 & 1164.3590 & {1.0174} & 857.2915 \\
+        & \textcolor{red}{8:2} & \textcolor{red}{1138.5327} & \textcolor{red}{0.9145} & \textcolor{red}{815.9355} \\
+        & 9:1 & 1398.7836 & 1.0759 & 984.8921 \\
+        \hline
+        \multirow{3}{*}{FCN} 
+        & 7:3 & 3824.7088 & 3.6075 & 3154.3828 \\
+        & 8:2 & 4811.8376 & 4.9807 & 4469.9363 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{2732.1560} & \textcolor{red}{2.3252} & \textcolor{red}{2142.9079} \\
+        \hline
+        \multirow{3}{*}{RNN} 
+        & 7:3 & 1619.5683 & 1.5273 & 1282.0946 \\
+        & 8:2 & 1743.8729 & 1.5051 & 1326.5244 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{1254.2616} & \textcolor{red}{0.9490} & \textcolor{red}{855.2889} \\
+        \hline
+        \multirow{3}{*}{LSTM} 
+        & 7:3 & 1697.3167 & 1.5419 & 1320.1187 \\
+        & \textcolor{red}{8:2} & \textcolor{red}{1151.5582} & \textcolor{red}{0.9525} & \textcolor{red}{847.6950} \\
+        & 9:1 & 1405.7421 & 1.0667 & 977.9067 \\
+        \hline
+        \multirow{3}{*}{FFT} 
+        & \textcolor{red}{7:3} & \textcolor{red}{7654.6091} & \textcolor{red}{8.0921} & \textcolor{red}{6359.1013} \\
+    
+        & 8:2 & 10661.2453 & 10.5581 & 9399.3536 \\
+       
+        & 9:1 & 9141.6520 & 8.1522 & 7465.4590 \\
+         \hline
+        \multirow{3}{*}{XGBOOST} 
+        & 7:3 & 3716.7589 & 3.0326 & 2705.8227 \\
+        & 8:2 & 4671.1649 & 4.0999 & 3751.2325 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{3350.2323} & \textcolor{red}{2.9121} & \textcolor{red}{2708.4345} \\
+        \hline
+        \multirow{3}{*}{LR} 
+        & 7:3 & 6987.9849 & 7.1427 & 5818.5129 \\
+        & 8:2 & 9168.4296 & 10.5427 & 8439.4780 \\
+        & \textcolor{red}{9:1} & \textcolor{red}{6673.7497} & \textcolor{red}{6.9101} & \textcolor{red}{5853.9128} \\
+        \hline
+    \end{tabular}
+    \caption{VCB Dataset's Evaluation}
+    \label{vcbdataset}
+\end{table}
+Based on the error metrics table for predicting VCB stock prices, GRU emerges as the most accurate model with an 8:2 data split. RNN and LSTM also achieve high accuracy, with RNN performing best in the 9:1 split and LSTM performing best in the 8:2 split. Although ARIMA shows the best performance in the 9:1 split, it still lags behind neural network models like GRU, RNN, and LSTM. FFT and LR, despite some improvement in certain cases, exhibit high and unstable errors, indicating they are less suitable for this dataset.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/ARIMA-VCB.png}
+        \caption{ARIMA model’s result with 9:1 splitting proportion}
+        \label{fig:ARIMA-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/GRU-VCB.png}
+        \caption{GRU model’s result with 9:1 splitting proportion}
+        \label{fig:GRU-VCB}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FCN-VCB.png}
+        \caption{FCN model’s result with 7:3 splitting proportion}
+        \label{fig:FCN-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/RNN-VCB.png}
+        \caption{RNN model’s result with 9:1 splitting proportion}
+        \label{fig:RNN-VCB}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LSTM-VCB.png}
+        \caption{LSTM model’s result with 8:2 splitting proportion}
+        \label{fig:LSTM-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/FFT-VCB.png}
+        \caption{FFT model’s result with 7:3 splitting proportion}
+        \label{fig:FFT-VCB}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/XGBoost-VCB.png}
+        \caption{XGBoost model’s result with 9:1 splitting proportion}
+        \label{fig:XGBoost-VCB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/diagram/LR-VCB.png}
+        \caption{LR model’s result with 9:1 splitting proportion}
+        \label{fig:LR-VCB}
+    \end{minipage}
+\end{figure}
+% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+
 
 
 \section{Conclusion}
-Based on the summary table of the accuracy of 8 models (ARIMA, GRU, FCN, RNN, LSTM, FFT, XGBoost, and Linear Regression) for 3 datasets (ACB, BID, and VCB) with 3 train-test ratios (7:3, 8:2, and 9:1), we can draw some notable conclusions:
+This research investigates the application of various machine learning and statistical models for stock price prediction, specifically focusing on ARIMA, GRU, FCN, RNN, LSTM, FFT, XGBoost, and Linear Regression. The study evaluates the performance of these models across three datasets (ACB, BID, and VCB) with three train-test ratios (7:3, 8:2, and 9:1). The models are assessed using common evaluation metrics: RMSE (Root Mean Squared Error), MAPE (Mean Absolute Percentage Error), and MAE (Mean Absolute Error).
 
-GRU and RNN demonstrate impressive performance across all three datasets and all train-test ratios. Their RMSE, MAPE, and MAE scores are significantly lower compared to the ARIMA, FFT, and Linear Regression models. GRU is also a strong choice with similar performance when the train-test ratio is 8:2. XGBoost also shows good performance, especially with train-test ratios of 7:3 and 8:2, outperforming traditional models.
+GRU, FCN, RNN, LSTM, and XGBoost have lower evaluation metrics compared to the other models, indicating more accurate and efficient predictions. Specifically, XGBoost delivers the best results for the ACB dataset, outperforming other models in predicting ACB stock prices. XGBoost, with its ability to handle complex relationships and high performance on large datasets, shows strong potential for stock trend prediction.
 
-LSTM, with a train-test ratio of 8:2, gives the best prediction results for BID stock prices, with the lowest RMSE, MAPE, and MAE, but it is not as stable as GRU and RNN. Its results are generally average compared to other models, but overall, LSTM stands out and is the top choice for predicting BID stock prices. FCN shows positive results with ACB and BID but is not stable with VCB.
+Meanwhile, GRU demonstrates superior performance in predicting stock prices for BID and VCB. With its capability to capture sequential dependencies and process complex sequential data, GRU stands out in predicting the fluctuation patterns in the stock markets of BID and VCB. RNN also shows impressive performance, particularly in handling sequential data, helping to capture effective time-series patterns.
 \section{ORIENTATION}
-The report can be expanded and improved by enhancing evaluation methods such as  perform sensitivity analysis to better understand the influence of each input factor on the forecasting results. Secondly, develop Real-Time Forecasting Systems like create a real-time forecasting system to continuously provide investment recommendations to investors. These development directions will help improve the accuracy and applicability of forecasting models, better supporting investors in making informed decisions.
+In the future, this research could expand in several promising directions. Integrating more advanced deep learning architectures than those currently studied could bring new insights. Models such as BERT (Bidirectional Encoder Representations from Transformers) or T5 (Text-To-Text Transfer Transformer), based on Transformer technology, have demonstrated outstanding capabilities in natural language processing and could be beneficial for predicting stock prices by capturing complex relationships within contexts.
+
+Furthermore, incorporating richer external data sources beyond stock price history alone, such as broader economic indicators, sentiment analysis from news, or alternative data streams, could enrich the models' inputs and enhance their predictive abilities across diverse market conditions.
 
 \section{Acknowledgment}
 \addcontentsline{toc}{section}{Acknowledgment}
@@ -521,14 +816,12 @@ Ding, X., Zhang, Y., Liu, T., \& Duan, J. (2015, June). Deep learning for event-
 Shejul, A. A., Chaudhari, A., Dixit, B. A., \& Lavanya, B. M. (2023). Stock Price Prediction Using GRU, SimpleRNN and LSTM. In Intelligent Systems and Applications: Select Proceedings of ICISA 2022 (pp. 529-535). Singapore: Springer Nature Singapore.
 \bibitem{fjellstrom2022lstm}
 Fjellström, C. (2022, December). Long short-term memory neural network for financial time series. In 2022 IEEE International Conference on Big Data (Big Data) (pp. 3496-3504). IEEE.
-\bibitem{mehtab2020stock}
-Mehtab, S., \& Sen, J. (2020, November). Stock price prediction using CNN and LSTM-based deep learning models. In 2020 International Conference on Decision Aid Sciences and Application (DASA) (pp. 447-453). IEEE.
 \bibitem{ChenFFT}
 Chen, M. Y., \& Chen, B. T. (2014). Online fuzzy time series analysis based on entropy discretization and a Fast Fourier Transform. Applied Soft Computing, 14, 156-166.
 \bibitem{jin2019using}
 Jin, Q., Fan, X., Liu, J., Xue, Z., \& Jian, H. (2019). Using eXtreme Gradient BOOSTing to predict changes in tropical cyclone intensity over the Western North Pacific. Atmosphere, 10(6), 341.
 \bibitem{chen2016xgboost}
-Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).
+Chen, T., & Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 785-794).
 \bibitem{nabiee2023stock}
 Nabiee, S., \& Bagherzadeh, N. (2023). Stock Trend Prediction: A Semantic Segmentation Approach. arXiv preprint arXiv:2303.09323.
 
@@ -550,10 +843,10 @@ S.J. Roberts. "Lecture 7 - The Discrete Fourier Transform".
 Evans, J. R. (2017). Business analytics: Methods, models, and decisions. Pearson.
 
 \bibitem{Xgboost}
-Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).
+Chen, T., & Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 785-794).
 
 \bibitem{geekXGboost}
-P. Pawangfg, "XGBoost," GeeksforGeeks, Available: https://www.geeksforgeeks.org/xgboost/. [Accessed: 06-Feb-2023].
+P. Pawangfg. (n.d.). XGBoost. GeeksforGeeks. Retrieved February 6, 2023, from https://www.geeksforgeeks.org/xgboost/.
 
 %GRU
 \bibitem{Yamak}
@@ -561,6 +854,9 @@ Yamak, P. T., Yujian, L., \& Gadosey, P. K. (2019, December). A comparison betwe
 %FCN
 \bibitem{Ismail}
 Long, J., Shelhamer, E., \& Darrell, T. (2015). Fully convolutional networks for semantic segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 3431-3440).
+
+\bibitem{Eval}
+González-Sopeña, J. M., Pakrashi, V., & Ghosh, B. (2021). An overview of performance evaluation metrics for short-term statistical wind power forecasting. Renewable and Sustainable Energy Reviews, 138, 110515.
 % RNN
 \bibitem{IBM}
 IBM Technology company, “What are recurrent neural networks?”, Available at: \url{https://www.ibm.com/topics/recurrent-neural-networks}
@@ -568,6 +864,12 @@ IBM Technology company, “What are recurrent neural networks?”, Available at:
 Chung, J., Gulcehre, C., Cho, K., \& Bengio, Y. (2014). Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555.
 \bibitem{standford}
 A. Amidi and S. Amidi, "Recurrent Neural Networks Cheatsheet," Stanford University, [Online].
+
+\bibitem{LSTM1}
+Olah, C. (2015, August 27). Understanding LSTM Networks. Retrieved June 20, 2024, from https://colah.github.io/posts/2015-08-Understanding-LSTMs/.
+
+\bibitem{LSTM2}
+Van Houdt, G., Mosquera, C., & Nápoles, G. (2020). A Review on the Long Short-Term Memory Model. Artificial Intelligence Review, 54(1), 1-27. https://doi.org/10.1007/s10462-020-09838-1
 
 
 
