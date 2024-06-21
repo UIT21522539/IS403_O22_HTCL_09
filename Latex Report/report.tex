@@ -350,7 +350,67 @@ h_t = o_t \ast \tanh(C_t)
     \end{minipage}
 \end{figure}
 \subsection{GRU}
+The Gated Recurrent Unit (GRU) is another variant of
+the RNN architecture that addresses the short-term memory
+issue and offers a simpler structure compared to LSTM [26].
+GRU combines the input gate and forget gate of LSTM into
+a single update gate, resulting in a more streamlined design.
+Unlike LSTM, GRU does not include a separate cell state.
+A GRU unit consists of three main components: an
+update gate, a reset gate, and the current memory content.
+These gates enable the GRU to selectively update and utilize
+information from previous time steps, allowing it to capture
+long-term dependencies in sequences
 
+The update gate (equation 1) determines how much of
+the past information should be retained and combined with
+the current input at a specific time step. It is computed based
+on the concatenation of the previous hidden state \( h_{t−1} \) and
+the current input \( x_{t} \),
+followed by a linear transformation and
+a sigmoid activation function.
+\[
+z_{t} = \sigma(W_{z}
+[h_{t−1}, x_{t}] + b_{z}) \quad (1)
+\]
+The reset gate (equation 2) decides how much of the past
+information should be forgotten. It is computed in a similar
+manner to the update gate using the concatenation of the
+previous hidden state and the current input.
+\[
+r_{t} = \sigma(W_{r}
+[h_{t−1}, x_{t}]+ b_{r}) \quad (2)
+\]
+The current memory content (equation 3) is calculated based
+on the reset gate and the concatenation of the transformed
+previous hidden state and the current input. The result is
+passed through a hyperbolic tangent activation function to
+produce the candidate activation.
+\[
+\tilde{h}_{t} = \tanh(W_{h}
+[r_{t}h_{t−1}, x_{t}]) \quad (3)
+\]
+Finally, the final memory state \( h_{t} \)
+is determined by a
+combination of the previous hidden state and the candidate
+activation (equation 4). The update gate determines the
+balance between the previous hidden state and the candidate
+activation. Additionally, an output gate \( o_{t} \) can be introduced
+to control the information flow from the current memory
+content to the output (equation 5). The output gate is
+computed using the current memory state \( h_{t} \) and is typically
+followed by an activation function, such as the sigmoid
+function.
+\[
+h_{t} = (1 −z_{t})
+h_{t−1} + z_{t}\tilde{h}_{t} \quad (4)
+\]
+\[
+o_{t} = \sigma_{o}
+(W_{o}h_{t} + b_{o}) \quad (5)
+\]
+where the weight matrix of the output layer is \( W_{o} \) and the bias
+vector of the output layer is \( b_{o} \).\cite{Yamak}
 
 \begin{figure}[H]
     \centering
@@ -410,7 +470,7 @@ spatial dimensions.\cite{Ismail}
 \subsection{Evaluation Methods}
 \textbf{Mean Percentage Absolute Error} (MAPE): is the average percentage error in a set of predicted values\cite{Eval}.\\
 \begin{equation*}
-    MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} |  = 1 
+    MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} | 
 \end{equation*}
 \textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values\cite{Eval}.
 \begin{equation*}
